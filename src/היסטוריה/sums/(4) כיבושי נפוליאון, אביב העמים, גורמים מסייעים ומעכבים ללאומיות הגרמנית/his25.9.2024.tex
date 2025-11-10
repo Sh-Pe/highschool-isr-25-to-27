@@ -1,0 +1,372 @@
+%! ~~~ Packages Setup ~~~ 
+\documentclass[]{article}
+
+
+% Math packages
+\usepackage[usenames]{color}
+\usepackage{forest}
+\usepackage{ifxetex,ifluatex,amsmath,amssymb,mathrsfs,amsthm,witharrows,mathtools}
+\WithArrowsOptions{displaystyle}
+\renewcommand{\qedsymbol}{$\blacksquare$} % end proofs with \blacksquare. Overwrites the defualts. 
+\usepackage{cancel,bm}
+\usepackage[thinc]{esdiff}
+
+
+% tikz
+\usepackage{tikz}
+\newcommand\sqw{1}
+\newcommand\squ[4][1]{\fill[#4] (#2*\sqw,#3*\sqw) rectangle +(#1*\sqw,#1*\sqw);}
+
+
+% code 
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.35,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codenumber}{rgb}{0.1,0.3,0.5}
+\definecolor{codeblue}{rgb}{0,0,0.5}
+\definecolor{codered}{rgb}{0.5,0.03,0.02}
+\definecolor{codegray}{rgb}{0.96,0.96,0.96}
+
+\lstdefinestyle{pythonstylesheet}{
+	language=Python,
+	emphstyle=\color{deepred},
+	backgroundcolor=\color{codegray},
+	keywordstyle=\color{deepblue}\bfseries\itshape,
+	numberstyle=\scriptsize\color{codenumber},
+	basicstyle=\ttfamily\footnotesize,
+	commentstyle=\color{codegreen}\itshape,
+	breakatwhitespace=false, 
+	breaklines=true, 
+	captionpos=b, 
+	keepspaces=true, 
+	numbers=left, 
+	numbersep=5pt, 
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false, 
+	tabsize=4, 
+	morekeywords={as,assert,nonlocal,with,yield,self,True,False,None,AssertionError,ValueError,in,else},              % Add keywords here
+	keywordstyle=\color{codeblue},
+	emph={object,type,isinstance,copy,deepcopy,zip,enumerate,reversed,list,set,len,dict,tuple,print,range,xrange,append,execfile,real,imag,reduce,str,repr,__init__,__add__,__mul__,__div__,__sub__,__call__,__getitem__,__setitem__,__eq__,__ne__,__nonzero__,__rmul__,__radd__,__repr__,__str__,__get__,__truediv__,__pow__,__name__,__future__,__all__,},          % Custom highlighting
+	emphstyle=\color{codered},
+	stringstyle=\color{codegreen},
+	showstringspaces=false,
+	abovecaptionskip=0pt,belowcaptionskip =0pt,
+	framextopmargin=-\topsep, 
+}
+\newcommand\pythonstyle{\lstset{pythonstylesheet}}
+\newcommand\pyl[1]     {{\lstinline!#1!}}
+\lstset{style=pythonstylesheet}
+
+\usepackage[style=1,skipbelow=\topskip,skipabove=\topskip,framemethod=TikZ]{mdframed}
+\definecolor{bggray}{rgb}{0.85, 0.85, 0.85}
+\mdfsetup{leftmargin=0pt,rightmargin=0pt,innerleftmargin=15pt,backgroundcolor=codegray,middlelinewidth=0.5pt,skipabove=5pt,skipbelow=0pt,middlelinecolor=black,roundcorner=5}
+\BeforeBeginEnvironment{lstlisting}{\begin{mdframed}\vspace{-0.4em}}
+	\AfterEndEnvironment{lstlisting}{\vspace{-0.8em}\end{mdframed}}
+
+
+% Deisgn
+\usepackage[labelfont=bf]{caption}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{multicol}
+\usepackage[skip=4pt, indent=0pt]{parskip}
+\usepackage[normalem]{ulem}
+\forestset{default}
+\renewcommand\labelitemi{$\bullet$}
+\graphicspath{ {./} }
+
+
+% Hebrew initialzing
+\usepackage[bidi=basic]{babel}
+\PassOptionsToPackage{no-math}{fontspec}
+\babelprovide[main, import, Alph=letters]{hebrew}
+\babelprovide[import]{english}
+\babelfont[hebrew]{rm}{David CLM}
+\babelfont[hebrew]{sf}{David CLM}
+\babelfont[english]{tt}{Monaspace Xenon}
+\usepackage[shortlabels]{enumitem}
+\newlist{hebenum}{enumerate}{1}
+
+% Language Shortcuts
+\newcommand\en[1] {\begin{otherlanguage}{english}#1\end{otherlanguage}}
+\newcommand\sen   {\begin{otherlanguage}{english}}
+	\newcommand\she   {\end{otherlanguage}}
+\newcommand\del   {$ \!\! $}
+\newcommand\ttt[1]{\en{\footnotesize\texttt{#1}\normalsize}}
+
+\newcommand\npage {\vfil {\hfil \textbf{\textit{המשך בעמוד הבא}}} \hfil \vfil \pagebreak}
+\newcommand\ndoc  {\dotfill \\ \vfil {\begin{center} {\textbf{\textit{שחר פרץ, 2024}} \\ \scriptsize \textit{נוצר באמצעות תוכנה חופשית בלבד}} \end{center}} \vfil	}
+
+\newcommand{\rn}[1]{
+	\textup{\uppercase\expandafter{\romannumeral#1}}
+}
+
+\makeatletter
+\newcommand{\skipitems}[1]{
+	\addtocounter{\@enumctr}{#1}
+}
+\makeatother
+
+%! ~~~ Math shortcuts ~~~
+
+% Letters shortcuts
+\newcommand\N     {\mathbb{N}}
+\newcommand\Z     {\mathbb{Z}}
+\newcommand\R     {\mathbb{R}}
+\newcommand\Q     {\mathbb{Q}}
+\newcommand\C     {\mathbb{C}}
+
+\newcommand\ml    {\ell}
+\newcommand\mj    {\jmath}
+\newcommand\mi    {\imath}
+
+\newcommand\powerset {\mathcal{P}}
+\newcommand\ps    {\mathcal{P}}
+\newcommand\pc    {\mathcal{P}}
+\newcommand\ac    {\mathcal{A}}
+\newcommand\bc    {\mathcal{B}}
+\newcommand\cc    {\mathcal{C}}
+\newcommand\dc    {\mathcal{D}}
+\newcommand\ec    {\mathcal{E}}
+\newcommand\fc    {\mathcal{F}}
+\newcommand\nc    {\mathcal{N}}
+\newcommand\sca   {\mathcal{S}} % \sc is already definded
+\newcommand\rca   {\mathcal{R}} % \rc is already definded
+
+\newcommand\Si    {\Sigma}
+
+% Logic & sets shorcuts
+\newcommand\siff  {\longleftrightarrow}
+\newcommand\ssiff {\leftrightarrow}
+\newcommand\so    {\longrightarrow}
+\newcommand\sso   {\rightarrow}
+
+\newcommand\epsi  {\epsilon}
+\newcommand\vepsi {\varepsilon}
+\newcommand\vphi  {\varphi}
+\newcommand\Neven {\N_{\mathrm{even}}}
+\newcommand\Nodd  {\N_{\mathrm{odd }}}
+\newcommand\Zeven {\Z_{\mathrm{even}}}
+\newcommand\Zodd  {\Z_{\mathrm{odd }}}
+\newcommand\Np    {\N_+}
+
+% Text Shortcuts
+\newcommand\open  {\big(}
+\newcommand\qopen {\quad\big(}
+\newcommand\close {\big)}
+\newcommand\also  {\text{, }}
+\newcommand\defi  {\text{ definition}}
+\newcommand\defis {\text{ definitions}}
+\newcommand\given {\text{given }}
+\newcommand\case  {\text{if }}
+\newcommand\syx   {\text{ syntax}}
+\newcommand\rle   {\text{ rule}}
+\newcommand\other {\text{else}}
+\newcommand\set   {\ell et \text{ }}
+\newcommand\ans   {\mathit{Ans.}}
+
+% Set theory shortcuts
+\newcommand\ra    {\rangle}
+\newcommand\la    {\langle}
+
+\newcommand\oto   {\leftarrow}
+
+\newcommand\QED   {\quad\quad\mathscr{Q.E.D.}\;\;\blacksquare}
+\newcommand\QEF   {\quad\quad\mathscr{Q.E.F.}}
+\newcommand\eQED  {\mathscr{Q.E.D.}\;\;\blacksquare}
+\newcommand\eQEF  {\mathscr{Q.E.F.}}
+\newcommand\jQED  {\mathscr{Q.E.D.}}
+
+\newcommand\dom   {\mathrm{dom}}
+\newcommand\Img   {\mathrm{Im}}
+\newcommand\range {\mathrm{range}}
+
+\newcommand\trio  {\triangle}
+
+\newcommand\rc    {\right\rceil}
+\newcommand\lc    {\left\lceil}
+\newcommand\rf    {\right\rfloor}
+\newcommand\lf    {\left\lfloor}
+
+\newcommand\lex   {<_{lex}}
+
+\newcommand\az    {\aleph_0}
+\newcommand\uaz   {^{\aleph_0}}
+\newcommand\al    {\aleph}
+\newcommand\ual   {^\aleph}
+\newcommand\taz   {2^{\aleph_0}}
+\newcommand\utaz  { ^{\left (2^{\aleph_0} \right )}}
+\newcommand\tal   {2^{\aleph}}
+\newcommand\utal  { ^{\left (2^{\aleph} \right )}}
+\newcommand\ttaz  {2^{\left (2^{\aleph_0}\right )}}
+
+\newcommand\n     {$n$־יה\ }
+
+% Math A&B shortcuts
+\newcommand\logn  {\log n}
+\newcommand\logx  {\log x}
+\newcommand\lnx   {\ln x}
+\newcommand\cosx  {\cos x}
+\newcommand\cost  {\cos \theta}
+\newcommand\sinx  {\sin x}
+\newcommand\sint  {\sin \theta}
+\newcommand\tanx  {\tan x}
+\newcommand\tant  {\tan \theta}
+\newcommand\sex   {\sec x}
+\newcommand\sect  {\sec^2}
+\newcommand\cotx  {\cot x}
+\newcommand\cscx  {\csc x}
+\newcommand\sinhx {\sinh x}
+\newcommand\coshx {\cosh x}
+\newcommand\tanhx {\tanh x}
+
+\newcommand\seq   {\overset{!}{=}}
+\newcommand\slh   {\overset{LH}{=}}
+\newcommand\sle   {\overset{!}{\le}}
+\newcommand\sge   {\overset{!}{\ge}}
+\newcommand\sll   {\overset{!}{<}}
+\newcommand\sgg   {\overset{!}{>}}
+
+\newcommand\h     {\hat}
+\newcommand\ve    {\vec}
+\newcommand\lv    {\overrightarrow}
+\newcommand\ol    {\overline}
+
+\newcommand\mlcm  {\mathrm{lcm}}
+
+\DeclareMathOperator{\sech}   {sech}
+\DeclareMathOperator{\csch}   {csch}
+\DeclareMathOperator{\arcsec} {arcsec}
+\DeclareMathOperator{\arccot} {arcCot}
+\DeclareMathOperator{\arccsc} {arcCsc}
+\DeclareMathOperator{\arccosh}{arccosh}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\arcsech}{arcsech}
+\DeclareMathOperator{\arccsch}{arccsch}
+\DeclareMathOperator{\arccoth}{arccoth} 
+
+\newcommand\dx    {\,\mathrm{d}x}
+\newcommand\dt    {\,\mathrm{d}t}
+\newcommand\dtt   {\,\mathrm{d}\theta}
+\newcommand\du    {\,\mathrm{d}u}
+\newcommand\dv    {\,\mathrm{d}v}
+\newcommand\df    {\mathrm{d}f}
+\newcommand\dfdx  {\diff{f}{x}}
+\newcommand\dit   {\limhz \frac{f(x + h) - f(x)}{h}}
+
+\newcommand\nt[1] {\frac{#1}{#1}}
+
+\newcommand\limz  {\lim_{x \to 0}}
+\newcommand\limxz {\lim_{x \to x_0}}
+\newcommand\limi  {\lim_{x \to \infty}}
+\newcommand\limh  {\lim_{x \to 0}}
+\newcommand\limni {\lim_{x \to - \infty}}
+\newcommand\limpmi{\lim_{x \to \pm \infty}}
+
+\newcommand\ta    {\theta}
+\newcommand\ap    {\alpha}
+
+\renewcommand\inf {\infty}
+\newcommand  \ninf{-\inf}
+
+% Combinatorics shortcuts
+\newcommand\sumnk     {\sum_{k = 0}^{n}}
+\newcommand\sumni     {\sum_{i = 0}^{n}}
+\newcommand\sumnko    {\sum_{k = 1}^{n}}
+\newcommand\sumnio    {\sum_{i = 1}^{n}}
+\newcommand\sumai     {\sum_{i = 1}^{n} A_i}
+\newcommand\nsum[2]   {\reflectbox{\displaystyle\sum_{\reflectbox{\scriptsize$#1$}}^{\reflectbox{\scriptsize$#2$}}}}
+
+\newcommand\bink      {\binom{n}{k}}
+\newcommand\setn      {\{a_i\}^{2n}_{i = 1}}
+\newcommand\setc[1]   {\{a_i\}^{#1}_{i = 1}}
+
+\newcommand\cupain    {\bigcup_{i = 1}^{n} A_i}
+\newcommand\cupai[1]  {\bigcup_{i = 1}^{#1} A_i}
+\newcommand\cupiiai   {\bigcup_{i \in I} A_i}
+\newcommand\capain    {\bigcap_{i = 1}^{n} A_i}
+\newcommand\capai[1]  {\bigcap_{i = 1}^{#1} A_i}
+\newcommand\capiiai   {\bigcap_{i \in I} A_i}
+
+\newcommand\xot       {x_{1, 2}}
+\newcommand\ano       {a_{n - 1}}
+\newcommand\ant       {a_{n - 2}}
+
+% Other shortcuts
+\newcommand\tl    {\tilde}
+\newcommand\op    {^{-1}}
+
+\newcommand\sof[1]    {\left | #1 \right |}
+\newcommand\cl [1]    {\left ( #1 \right )}
+\newcommand\csb[1]    {\left [ #1 \right ]}
+
+\newcommand\bs    {\blacksquare}
+
+%! ~~~ Document ~~~
+
+\author{שחר פרץ}
+\title{\textit{מדינה להדגמה – גרמניה}}
+\begin{document}
+	\maketitle
+	\section{שאלות}
+	
+	\begin{enumerate}
+		\item רקע – התנאים שבהם החלה פעילות התנועה הלאומית (מצב מדיני/חברתי, מי שלט במדינה וכו')
+		\item מטרות המאבק הלאומי
+		\item שלבים עקריים במאבק (טבלה)
+		\item גורמים מסייעים ומעכבים (לפי טבלה)
+		\item מאייפני המנהיג/מנהיגים (בהתייחס למאפייני המנהיגים בתנועות הלאומיות המודרניות). 
+		\item במה דומים ובמה שונים מאפייני התנועה הלאומית עליה כתבת מול המאפיינים הכלליים עליהם למדת
+	\end{enumerate}
+	
+	\section{תשובות}
+	
+	\subsection{רקע}
+	לפני כיבושי נפוליאון, איזור גרמניה היה מחולק לכ־300 ריבונים שונים, ולאחריהם, ההסדרים המדיניים ביניהן נשברו ואלו הפכו ל־38 מדינות הקשורות בברית הגרמנית – ברית חלשה ללא אופי לאומי. בפרט, פרוסיה־סקסוניה כיסתה את מרבית צפון גרמניה, ובדרום – אוסטרו־הונגרייה. 
+	
+	באותה התקופה, גרמניה התפתחה כלכלית באופן מהיל ביותר ונוצרו מסילות ברזל שחיברו בין המדינות בברית הגרמנית. יתרה מכך – הם יכלו לסחור ביניהן ללא מכסים. בכך המעמד הבורגני התחזק והוקל על הפצת רעיונות ברחבי גרמניה. 
+	
+	יש לציין כי לגרמניה הייתה היסטוריה ענפה, שנחקרה עוד לפני כיבושי נפוליאון. 
+	
+	\subsection{מטרות המאבק הלאומי}
+	מטרת המאבק הלאומי הייתה איחוד גרמניה, והמדינות בברית הגרמני, לכדי מדינה לאומית אחת. 
+	\subsection{שלבי המאבק}
+	\subsubsection{ההיערכות}
+	לאחר כיבושי נפוליאון, המשכילים ראו את רעיונות הלאומיות – ולאחר שנים של חקר התרבות הלאומית – התחילו להתעורר רגשות לאומיים בהם המבוססים על אילו. אותם משכילים התאמצו לשמר ולתעד את התרבות הגרמנית, ויצרו בסיס לבניית הזהות והתודעה הלאומית  בגרמניה. 
+	
+	\subsubsection{ההרחבה}
+	המשכילים יכלו להפיץ את רעיונותיהם בקלות בגרמניה. בין עם בסיפורים ושירים, בין עם בניצול הקשרים הכלכליים בין המדינות, ובין עם בצורות אחרות. התנועה הלאומית הגרמנית שהחלה להתבסס לאחר כיבושי נפוליאון, צברה תאוצה וכ־30 שנה לאחר מכן הייתה ידועה לכל ברחבי גרמניה (בשלב הזה, יחידה כלכלית אחת). התנועה התפרשה לכמעט כל גרמניה, וגם לאיזורים הנידחים יותר, כתוצאה מהקשרים  הכלכליים.
+	\subsubsection{המאבק}
+	\textit{עממי}: ב־1948-49, החל והסתיים אביב העמים הגרמני. ניכר לכל כי התנועה הלאומית צרובה בתרבות הגרמנית, וכוחה הובהר לכל – אך השליטים המקומיים דיכאו כל נסיון למרד. בפרנקפורט הוקם בפרלמנט הגרמני, שם הנציגים דיברו על המאבק ואף נקבעה חוקה. יש לציין כי כוחו של הפרלמנט היה קטן, עקב מחוסר בכוח צבאי, ומשום שרבים מן הדיבורים הללו – לא התרגמו למעשים על פני השטח. 
+	
+	\textit{מדיני, דיפלומטי, צבאי: }הפרלמנט הבין שאין ערך במאבקים לאומיים מבלי כוח צבאי, וניסה לגייס את פרוסיה למאבק. מלך פרוסיה סירב לפרלמנט הגרמני, בטיעון שכתרו "אינו כתר שיצרה אסיפה שנוצרה ע"י מהפכה, אלא כתר הנושא את חותם האלוהים", וטען שההצעה שהוצעה לו היא ל"כתר שדבק בו ריח הנבלה של מהפכת 1848". כלומר, הוא אינו אהב את התנועה הלאומית, ראה בה כמשהו מכפיש, לעומת האלוהות שהוא מייצג. הקיסר האוסטרי התנגד באופן תקיף לכל רעיון הלאומיות, ככזה המהווה לו סכנה קיומית. 
+	
+	אך ב־1964 אוטו פון ביסמק מונה לראש ממשלתו של ויליהם הראשון, מלך פרוסיה. בראי אביב העמים, ביסמק הבין את יכולת המאבק הלאומי, ובסדרה של מהלכים גרם לדנמרק, ואז לאוסטריה וצרפת, כל אחת מהן לפתוח במלחמה נגדו (שהוא עורר) – ותוך ניצול הרצון העז של העם לתנועה לאומית, והכנות מפוארות בהרבה מאלו של הצבאות היריבים. אומנם הוא לא כבש חלקים מאוסטריה ובנצחונו עליהם רק ווידא שלא ייתנגדו לאיחוד צפון גרמניה – אך ההישג בוצע, וצפון גרמניה אוחדה. יש לציין שגם ביסמרק לא העריך את הפרלמנט, וקרא ל"נאומים וההחלטות" שלהם, "המשגה של 1948-9" בטענה ש"בדם ובברזל" "ייפתרו הבעיות הגדולות של ימנו". 
+	\subsubsection{לאחר הקמת המדינה הריבונית}
+	ביסמק רצה לעודד את התנועה הלאומית הגרמנית, כמאחד גרמניה. בפרט, רצה לערער את מעמדה של הכנסייה הקטולית שייצגה נאמנות לאפיפיור, ולא לגרמניה. בכך פתח ב"מלחמת התרבות" – מספר חוקים שעקרו מהכנסיה את היכולת לשלוט במערת החינוך, פיקוח על הגשת כמרים, מניעתם לדבר על נושאים פוליטיים ועוד. נוסף על זאת, קבע ביטוח לאומי, קצבת זקנה, ביטוח תאונות ועוד – מעשים שגררו גיוס המעמדים הנמוכים, שבעבר הזדהו עם הכנסייה הקטולית. 
+	
+	\subsection{גורמים מסייעים ומעכבים}
+	\subsubsection{מסייעים}
+	\begin{itemize}
+		\item ברית המכס – הורדת המכס בין המדינות בברית הגרמנית, ויצירת בסיס כלכלי לאיחוד. 
+		\item תיעוש וצמיחה כלכלית מהירה, שיצרו מעמד בורגני שרצה ויכל לקבל את הרעיונות הלאומיים. 
+		\item עבר היסטורי שכבר היה קיים, וכבר נחקר ועד טרם הקמת התנועה. 
+		\item שפה משותפת ותרבות מפותחת, המשותפת תכולם. 
+		\item כוחה הצבאי של פרוסיה ונכונות ביסמרק לנצל את התנועה הלאומית ולכבוש שטחים נוספים. 
+	\end{itemize}
+	\subsubsection{מעכבים}
+	\begin{itemize}
+		\item התנגדות אוסטריה למאבק. 
+		\item רצון המעצמות האירופאיות, ובפרט צרפת, לשמור את גרמניה מפולגת, בגלל חשש מכוח גדול במרכז אירופה. 
+		\item שליטים מקומיים שרצו לשמר את כוחם ומעמדם, ולכן דיכאו את התנועה הלאומית בשטחיהם. 
+		\item למרות התרבות במשותפת, היה פיצול דתי בגרמניה. הקטולים העדיפו את היקסר האוסטרי, וחששו משליט פרוטסטנטי. 
+	\end{itemize}
+	
+	\subsection{מאפייני המנהיגים בתנועות הלאומיות}
+	בספר לא מפורטים מנהיגים ספציפיים של התנועה הלאומית עצמה. תנועה הלאומית היה פרלמנט, שקיבל את ההחלטות הקשורות אליה, ובו אכן היו אנשים מהמעמד מהמעמד הבורגני ובעל כושר ארגון ודיבור רטורי, אך קשה להצביע על מנהיג אחד. התנועה הלאומית רצתה לשים לעצמה כמנהיג את מלך פרוסיה או את הקיסר האוסטרי, כתלות במקום בגרמניה ממנו הגיע ההצעה (פרוטסנטי או קטולי), אך כך או אחרת מנהיגים אילו סירבו להוות חלק מהתנועה, והם אינם עונים על התנאים של מנהיג תנועה לאומית.
+	
+	אם אפשר לקרוא למישהו מנהיגה התנועה הלאומית, הוא אוטו פון ביסמרק – ראש ממשלתו של המלך ויליהאם הראשון, שניצל את התנועה הלאומית בשביל לאחד את גרמניה ולהפוך את פרוסיה למעצמה. לא היה לו עניין אידיאולוגי בתנועה אלא עניין צבאי בלבד, אך ללא ספק הוא האדם שאפשר את המאבק המלחמתי, והיה בעל עניין בשימור התנועה. 
+\end{document}

@@ -1,0 +1,496 @@
+%! ~~~ Packages Setup ~~~ 
+\documentclass[]{article}
+\usepackage{lipsum}
+\usepackage{rotating}
+
+
+% Math packages
+\usepackage[usenames]{color}
+\usepackage{forest}
+\usepackage{ifxetex,ifluatex,amsmath,amssymb,mathrsfs,amsthm,witharrows,mathtools,mathdots}
+\WithArrowsOptions{displaystyle}
+\renewcommand{\qedsymbol}{$\blacksquare$} % end proofs with \blacksquare. Overwrites the defualts. 
+\usepackage{cancel,bm}
+\usepackage[thinc]{esdiff}
+
+
+% tikz
+\usepackage{tikz}
+\usetikzlibrary{graphs}
+\newcommand\sqw{1}
+\newcommand\squ[4][1]{\fill[#4] (#2*\sqw,#3*\sqw) rectangle +(#1*\sqw,#1*\sqw);}
+
+
+% code 
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.35,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codenumber}{rgb}{0.1,0.3,0.5}
+\definecolor{codeblue}{rgb}{0,0,0.5}
+\definecolor{codered}{rgb}{0.5,0.03,0.02}
+\definecolor{codegray}{rgb}{0.96,0.96,0.96}
+
+\lstdefinestyle{pythonstylesheet}{
+	language=Java,
+	emphstyle=\color{deepred},
+	backgroundcolor=\color{codegray},
+	keywordstyle=\color{deepblue}\bfseries\itshape,
+	numberstyle=\scriptsize\color{codenumber},
+	basicstyle=\ttfamily\footnotesize,
+	commentstyle=\color{codegreen}\itshape,
+	breakatwhitespace=false, 
+	breaklines=true, 
+	captionpos=b, 
+	keepspaces=true, 
+	numbers=left, 
+	numbersep=5pt, 
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false, 
+	tabsize=4, 
+	morekeywords={as,assert,nonlocal,with,yield,self,True,False,None,AssertionError,ValueError,in,else},              % Add keywords here
+	keywordstyle=\color{codeblue},
+	emph={var, List, Iterable, Iterator},          % Custom highlighting
+	emphstyle=\color{codered},
+	stringstyle=\color{codegreen},
+	showstringspaces=false,
+	abovecaptionskip=0pt,belowcaptionskip =0pt,
+	framextopmargin=-\topsep, 
+}
+\newcommand\pythonstyle{\lstset{pythonstylesheet}}
+\newcommand\pyl[1]     {{\lstinline!#1!}}
+\lstset{style=pythonstylesheet}
+
+\usepackage[style=1,skipbelow=\topskip,skipabove=\topskip,framemethod=TikZ]{mdframed}
+\definecolor{bggray}{rgb}{0.85, 0.85, 0.85}
+\mdfsetup{leftmargin=0pt,rightmargin=0pt,innerleftmargin=15pt,backgroundcolor=codegray,middlelinewidth=0.5pt,skipabove=5pt,skipbelow=0pt,middlelinecolor=black,roundcorner=5}
+\BeforeBeginEnvironment{lstlisting}{\begin{mdframed}\vspace{-0.4em}}
+	\AfterEndEnvironment{lstlisting}{\vspace{-0.8em}\end{mdframed}}
+
+
+% Deisgn
+\usepackage[labelfont=bf]{caption}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{multicol}
+\usepackage[skip=4pt, indent=0pt]{parskip}
+\usepackage[normalem]{ulem}
+\forestset{default}
+\renewcommand\labelitemi{$\bullet$}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\graphicspath{ {./} }
+
+
+% Hebrew initialzing
+\usepackage[bidi=basic]{babel}
+\PassOptionsToPackage{no-math}{fontspec}
+\babelprovide[main, import, Alph=letters]{hebrew}
+\babelprovide[import]{english}
+\babelfont[hebrew]{rm}{David CLM}
+\babelfont[hebrew]{sf}{David CLM}
+\babelfont[english]{tt}{Monaspace Xenon}
+\usepackage[shortlabels]{enumitem}
+\newlist{hebenum}{enumerate}{1}
+
+% Language Shortcuts
+\newcommand\en[1] {\begin{otherlanguage}{english}#1\end{otherlanguage}}
+\newcommand\sen   {\begin{otherlanguage}{english}}
+	\newcommand\she   {\end{otherlanguage}}
+\newcommand\del   {$ \!\! $}
+
+\newcommand\npage {\vfil {\hfil \textbf{\textit{המשך בעמוד הבא}}} \hfil \vfil \pagebreak}
+\newcommand\ndoc  {\dotfill \\ \vfil {\begin{center} {\textbf{\textit{שחר פרץ, 2025}} \\ \scriptsize \textit{נוצר באמצעות תוכנה חופשית בלבד}} \end{center}} \vfil	}
+
+\newcommand{\rn}[1]{
+	\textup{\uppercase\expandafter{\romannumeral#1}}
+}
+
+\makeatletter
+\newcommand{\skipitems}[1]{
+	\addtocounter{\@enumctr}{#1}
+}
+\makeatother
+
+%! ~~~ Math shortcuts ~~~
+
+% Letters shortcuts
+\newcommand\N     {\mathbb{N}}
+\newcommand\Z     {\mathbb{Z}}
+\newcommand\R     {\mathbb{R}}
+\newcommand\Q     {\mathbb{Q}}
+\newcommand\C     {\mathbb{C}}
+
+\newcommand\ml    {\ell}
+\newcommand\mj    {\jmath}
+\newcommand\mi    {\imath}
+
+\newcommand\powerset {\mathcal{P}}
+\newcommand\ps    {\mathcal{P}}
+\newcommand\pc    {\mathcal{P}}
+\newcommand\ac    {\mathcal{A}}
+\newcommand\bc    {\mathcal{B}}
+\newcommand\cc    {\mathcal{C}}
+\newcommand\dc    {\mathcal{D}}
+\newcommand\ec    {\mathcal{E}}
+\newcommand\fc    {\mathcal{F}}
+\newcommand\nc    {\mathcal{N}}
+\newcommand\vc    {\mathcal{V}} % Vance
+\newcommand\sca   {\mathcal{S}} % \sc is already definded
+\newcommand\rca   {\mathcal{R}} % \rc is already definded
+
+\newcommand\prm   {\mathrm{p}}
+\newcommand\arm   {\mathrm{a}} % x86
+\newcommand\brm   {\mathrm{b}}
+\newcommand\crm   {\mathrm{c}}
+\newcommand\drm   {\mathrm{d}}
+\newcommand\erm   {\mathrm{e}}
+\newcommand\frm   {\mathrm{f}}
+\newcommand\nrm   {\mathrm{n}}
+\newcommand\vrm   {\mathrm{v}}
+\newcommand\srm   {\mathrm{s}}
+\newcommand\rrm   {\mathrm{r}}
+
+\newcommand\Si    {\Sigma}
+
+% Logic & sets shorcuts
+\newcommand\siff  {\longleftrightarrow}
+\newcommand\ssiff {\leftrightarrow}
+\newcommand\so    {\longrightarrow}
+\newcommand\sso   {\rightarrow}
+
+\newcommand\epsi  {\epsilon}
+\newcommand\vepsi {\varepsilon}
+\newcommand\vphi  {\varphi}
+\newcommand\Neven {\N_{\mathrm{even}}}
+\newcommand\Nodd  {\N_{\mathrm{odd }}}
+\newcommand\Zeven {\Z_{\mathrm{even}}}
+\newcommand\Zodd  {\Z_{\mathrm{odd }}}
+\newcommand\Np    {\N_+}
+
+% Text Shortcuts
+\newcommand\open  {\big(}
+\newcommand\qopen {\quad\big(}
+\newcommand\close {\big)}
+\newcommand\also  {\text{\en{, }}}
+\newcommand\defi  {\text{\en{ definition}}}
+\newcommand\defis {\text{\en{ definitions}}}
+\newcommand\given {\text{\en{given }}}
+\newcommand\case  {\text{\en{if }}}
+\newcommand\syx   {\text{\en{ syntax}}}
+\newcommand\rle   {\text{\en{ rule}}}
+\newcommand\other {\text{\en{else}}}
+\newcommand\set   {\ell et \text{ }}
+\newcommand\ans   {\mathscr{A}\!\mathit{nswer}}
+
+% Set theory shortcuts
+\newcommand\ra    {\rangle}
+\newcommand\la    {\langle}
+
+\newcommand\oto   {\leftarrow}
+
+\newcommand\QED   {\quad\quad\mathscr{Q.E.D.}\;\;\blacksquare}
+\newcommand\QEF   {\quad\quad\mathscr{Q.E.F.}}
+\newcommand\eQED  {\mathscr{Q.E.D.}\;\;\blacksquare}
+\newcommand\eQEF  {\mathscr{Q.E.F.}}
+\newcommand\jQED  {\mathscr{Q.E.D.}}
+
+\DeclareMathOperator\dom   {dom}
+\DeclareMathOperator\Img   {Im}
+\DeclareMathOperator\range {range}
+\DeclareMathOperator\col   {Col}
+
+\newcommand\trio  {\triangle}
+
+\newcommand\rc    {\right\rceil}
+\newcommand\lc    {\left\lceil}
+\newcommand\rf    {\right\rfloor}
+\newcommand\lf    {\left\lfloor}
+
+\newcommand\lex   {<_{lex}}
+
+\newcommand\az    {\aleph_0}
+\newcommand\uaz   {^{\aleph_0}}
+\newcommand\al    {\aleph}
+\newcommand\ual   {^\aleph}
+\newcommand\taz   {2^{\aleph_0}}
+\newcommand\utaz  { ^{\left (2^{\aleph_0} \right )}}
+\newcommand\tal   {2^{\aleph}}
+\newcommand\utal  { ^{\left (2^{\aleph} \right )}}
+\newcommand\ttaz  {2^{\left (2^{\aleph_0}\right )}}
+
+\newcommand\n     {$n$־יה\ }
+
+% Math A&B shortcuts
+\newcommand\logn  {\log n}
+\newcommand\logx  {\log x}
+\newcommand\lnx   {\ln x}
+\newcommand\cosx  {\cos x}
+\newcommand\cost  {\cos \theta}
+\newcommand\sinx  {\sin x}
+\newcommand\sint  {\sin \theta}
+\newcommand\tanx  {\tan x}
+\newcommand\tant  {\tan \theta}
+\newcommand\sex   {\sec x}
+\newcommand\sect  {\sec^2}
+\newcommand\cotx  {\cot x}
+\newcommand\cscx  {\csc x}
+\newcommand\sinhx {\sinh x}
+\newcommand\coshx {\cosh x}
+\newcommand\tanhx {\tanh x}
+
+\newcommand\seq   {\overset{!}{=}}
+\newcommand\slh   {\overset{LH}{=}}
+\newcommand\sle   {\overset{!}{\le}}
+\newcommand\sge   {\overset{!}{\ge}}
+\newcommand\sll   {\overset{!}{<}}
+\newcommand\sgg   {\overset{!}{>}}
+
+\newcommand\h     {\hat}
+\newcommand\ve    {\vec}
+\newcommand\lv    {\overrightarrow}
+\newcommand\ol    {\overline}
+
+\newcommand\mlcm  {\mathrm{lcm}}
+
+\DeclareMathOperator{\sech}   {sech}
+\DeclareMathOperator{\csch}   {csch}
+\DeclareMathOperator{\arcsec} {arcsec}
+\DeclareMathOperator{\arccot} {arcCot}
+\DeclareMathOperator{\arccsc} {arcCsc}
+\DeclareMathOperator{\arccosh}{arccosh}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\arcsech}{arcsech}
+\DeclareMathOperator{\arccsch}{arccsch}
+\DeclareMathOperator{\arccoth}{arccoth}
+\DeclareMathOperator{\atant}  {atan2} 
+\DeclareMathOperator{\Sp}     {span} 
+\DeclareMathOperator{\rk}     {rk}
+\DeclareMathOperator{\sgn}    {sgn} 
+
+\newcommand\dx    {\,\mathrm{d}x}
+\newcommand\dt    {\,\mathrm{d}t}
+\newcommand\dtt   {\,\mathrm{d}\theta}
+\newcommand\du    {\,\mathrm{d}u}
+\newcommand\dv    {\,\mathrm{d}v}
+\newcommand\df    {\mathrm{d}f}
+\newcommand\dfdx  {\diff{f}{x}}
+\newcommand\dit   {\limhz \frac{f(x + h) - f(x)}{h}}
+
+\newcommand\nt[1] {\frac{#1}{#1}}
+
+\newcommand\limz  {\lim_{x \to 0}}
+\newcommand\limxz {\lim_{x \to x_0}}
+\newcommand\limi  {\lim_{x \to \infty}}
+\newcommand\limh  {\lim_{x \to 0}}
+\newcommand\limni {\lim_{x \to - \infty}}
+\newcommand\limpmi{\lim_{x \to \pm \infty}}
+
+\newcommand\ta    {\theta}
+\newcommand\ap    {\alpha}
+
+\renewcommand\inf {\infty}
+\newcommand  \ninf{-\inf}
+
+% Combinatorics shortcuts
+\newcommand\sumnk     {\sum_{k = 0}^{n}}
+\newcommand\sumni     {\sum_{i = 0}^{n}}
+\newcommand\sumnko    {\sum_{k = 1}^{n}}
+\newcommand\sumnio    {\sum_{i = 1}^{n}}
+\newcommand\sumai     {\sum_{i = 1}^{n} A_i}
+\newcommand\nsum[2]   {\reflectbox{\displaystyle\sum_{\reflectbox{\scriptsize$#1$}}^{\reflectbox{\scriptsize$#2$}}}}
+
+\newcommand\bink      {\binom{n}{k}}
+\newcommand\setn      {\{a_i\}^{2n}_{i = 1}}
+\newcommand\setc[1]   {\{a_i\}^{#1}_{i = 1}}
+
+\newcommand\cupain    {\bigcup_{i = 1}^{n} A_i}
+\newcommand\cupai[1]  {\bigcup_{i = 1}^{#1} A_i}
+\newcommand\cupiiai   {\bigcup_{i \in I} A_i}
+\newcommand\capain    {\bigcap_{i = 1}^{n} A_i}
+\newcommand\capai[1]  {\bigcap_{i = 1}^{#1} A_i}
+\newcommand\capiiai   {\bigcap_{i \in I} A_i}
+
+\newcommand\xot       {x_{1, 2}}
+\newcommand\ano       {a_{n - 1}}
+\newcommand\ant       {a_{n - 2}}
+
+% Linear Algebra
+\DeclareMathOperator{\chr}    {char}
+
+\newcommand\lra       {\leftrightarrow}
+\newcommand\chrf      {\chr(\F)}
+\newcommand\F         {\mathbb{F}}
+\newcommand\co        {\colon}
+\newcommand\tmat[2]   {\cl{\begin{matrix}
+			#1
+		\end{matrix}\, \middle\vert\, \begin{matrix}
+			#2
+\end{matrix}}}
+
+\makeatletter
+\newcommand\rrr[1]    {\xxrightarrow{1}{#1}}
+\newcommand\rrt[2]    {\xxrightarrow{1}[#2]{#1}}
+\newcommand\mat[2]    {M_{#1\times#2}}
+\newcommand\tomat     {\, \dequad \longrightarrow}
+\newcommand\pms[1]    {\begin{pmatrix}
+		#1
+\end{pmatrix}}
+
+% someone's code from the internet: https://tex.stackexchange.com/questions/27545/custom-length-arrows-text-over-and-under
+\makeatletter
+\newlength\min@xx
+\newcommand*\xxrightarrow[1]{\begingroup
+	\settowidth\min@xx{$\m@th\scriptstyle#1$}
+	\@xxrightarrow}
+\newcommand*\@xxrightarrow[2][]{
+	\sbox8{$\m@th\scriptstyle#1$}  % subscript
+	\ifdim\wd8>\min@xx \min@xx=\wd8 \fi
+	\sbox8{$\m@th\scriptstyle#2$} % superscript
+	\ifdim\wd8>\min@xx \min@xx=\wd8 \fi
+	\xrightarrow[{\mathmakebox[\min@xx]{\scriptstyle#1}}]
+	{\mathmakebox[\min@xx]{\scriptstyle#2}}
+	\endgroup}
+\makeatother
+
+
+% Greek Letters
+\newcommand\ag        {\alpha}
+\newcommand\bg        {\beta}
+\newcommand\cg        {\gamma}
+\newcommand\dg        {\delta}
+\newcommand\eg        {\epsi}
+\newcommand\zg        {\zeta}
+\newcommand\hg        {\eta}
+\newcommand\tg        {\theta}
+\newcommand\ig        {\iota}
+\newcommand\kg        {\keppa}
+\renewcommand\lg      {\lambda}
+\newcommand\og        {\omicron}
+\newcommand\rg        {\rho}
+\newcommand\sg        {\sigma}
+\newcommand\yg        {\usilon}
+\newcommand\wg        {\omega}
+
+\newcommand\Ag        {\Alpha}
+\newcommand\Bg        {\Beta}
+\newcommand\Cg        {\Gamma}
+\newcommand\Dg        {\Delta}
+\newcommand\Eg        {\Epsi}
+\newcommand\Zg        {\Zeta}
+\newcommand\Hg        {\Eta}
+\newcommand\Tg        {\Theta}
+\newcommand\Ig        {\Iota}
+\newcommand\Kg        {\Keppa}
+\newcommand\Lg        {\Lambda}
+\newcommand\Og        {\Omicron}
+\newcommand\Rg        {\Rho}
+\newcommand\Sg        {\Sigma}
+\newcommand\Yg        {\Usilon}
+\newcommand\Wg        {\Omega}
+
+% Other shortcuts
+\newcommand\tl    {\tilde}
+\newcommand\op    {^{-1}}
+
+\newcommand\sof[1]    {\left | #1 \right |}
+\newcommand\cl [1]    {\left ( #1 \right )}
+\newcommand\csb[1]    {\left [ #1 \right ]}
+\newcommand\ccb[1]    {\left \{ #1 \right \}}
+
+\newcommand\bs        {\blacksquare}
+\newcommand\dequad    {\!\!\!\!\!\!}
+\newcommand\dequadd   {\dequad\duquad}
+\newcommand\wmid      {\;\middle\vert\;}
+
+\renewcommand\phi     {\varphi}
+\newcommand\bcl[1]    {\big(#1\big)}
+
+%! ~~~ Document ~~~
+
+\author{שחר פרץ}
+\title{\textit{היסטוריה 17}}
+\begin{document}
+	\maketitle
+	\section{ארגונים וכו'}
+	\subsection{רוטשילד}
+	רוטשילד – מסייע להתיישבות שאינה סוציאליסטית (כי הוא היה קפיטליסטי). ללא רוטשילד, ההתיישבות באותה התקופה הייתה קורסת,פ ואנשים היו חוזרים לאירופה (וזה לא שאנשים לא חזרו לאירופה). ע"פ המורה, אנחנו מלמדים רק את מה שנוח לנו מהציונות ואת הצלחותיה, אך אנשים רבים אכן חזרו לאירופה. נדגיש את ההתיישבות החקלאית, כי זהו האידיאל הציוני – כיבוש האדמה, העבודה, וכו'. מרבית היהודים שהיגוע לארץ התיישבו לעיר, ולא במושבות או בקבוצה (הבהרה: קוטשילד לא היה סוציאליסט ולכן לא תרם לקבוצה). 
+	
+	"אנחנו מלמדים היסטוריה באג'נדה מסוימת, אך קחו בחשבון שיש תפישה קצת יותר רחבה". 
+	
+	רוטשילד לא מנהיג ציוני. למעשה, לא היה ציוני כלל. הוא רואה חשיבות בגרעיני התיישבות של היהודםי בארץ, בשביל לפתור מצוקה של יהודי אירופה ובעיקר יהודי רוסיה (פוגרומים) וכדי לשנות את הדימוי היהודי. 
+	\begin{itemize}
+		\item רודטשילד ראב באיכרים את גרעין ההתיישבות הלאומית. 
+		\item סייע בארץ עוד לפני העליה הראשונה
+		\item רצה לשנות את דמית היהודים. 
+	\end{itemize}
+	הוא לא היה ציוני, כי לא תמך ברעיון בלאומי. 
+	
+	רוטשילד סייע בישטת האפוטרופסות (החסות). הוא רכש את האדמות מן המתיישבים, והוא הפביא פקידים [נציגים שלו] שניהלו את המשובות. אותם פקידים ניהלו את המשבות בתפישה של רווח – לא בתפיסה אידיאולוגית של לאומיות. הפקידים קבעו את שחכם של המתיישבים. זה מנוגד לאידיאל לציוני – לפיו, אנשים עובדים את אדמתם, בשביל לקיים את עצמם. אותם אנשים שקיבלו כסף הפכו לשכירים, שעובדים אדמה של מישהו אחר. 
+	
+	פקידי הברון הגיעו מצרפת, לא היו ציונים, והגיעו עם תפישה אחרת. היה להם אג'נדה לקדם את היישוב היהודי ממקום כלכלי ולא ממקום ציוני, והם לא הקשיבו למתיישבים ולדעותיהם. 
+	
+	לסיכום, קוטשילד קידם מאוד את ההתיישבות ואת התעשייה, אך בצורה שמנוגדת לתפישה האידיאולוגית הציונית. הוא גם לא תרם כסף להרצל. 
+	\subsubsection{ייתרונות: }
+	\begin{itemize}
+		\item בסיסו המושבות הראשונות
+		\item שיטות עבודה השפרו, קיבלו נסיון חקלאי, והשתמשו בכלי עבודה מוקנים יותר. 
+		\item טיפל בהתנהלות מול העו'תמנים, ורכישת קרקעות (העו'תמנים אסרו לכאורה על רכישת קרקעות ולא אהבו את ההתיישבות היהודית). 
+		\item הקמת מערכת שירותים מפותחת: בתי ספר, גני ילדים, מרפאות, בתי כנסת וכו'. 
+	\end{itemize}
+	
+	לדוגמה, ענף היין הצליח במיוחד. תעשיות הזכוכית והבשמים נכשלו. קפיצת מדרגה – לא רק חקלאות, אלא גם ייזמות. 
+	
+	בכך פתר בעיות רבות – המתיישבים ניסו לגדל חיטה בהר (לא אפשרי) משום שלא היה להם שום נסיון. רוטשילד יק להם הכשרה חקלאית מתקדמת ובכך אפשר את קיום המושבות. 
+	
+	המשפחה של רודטישד הייתה עשירה במיוחד, אימפריות רבות לקחו הללבאות מאותם הבנקים. 
+	
+	\subsubsection{חשונות: }
+	\begin{itemize}
+		\item ניכור בני הפקידים למתיישבים ברמה האידיאולוגית והתרבותית (מזרח אירופה לעומת צרפת). הצרפתים ראו את המזרח־אירופאים כנחותים מהם. התרבות 
+		\item המתיישבים שרצו ליצור את דמות היהודי החדש נעשו תלויים בברון. 
+		\item התשבות הצרפתית שהגיעה עם הפקידים חדרה חיי המתיישבים והם חששו מכך. 
+	\end{itemize}
+	
+	בשנת 1900 הברון הפסיק לתמוך במושבות והעביר את המושבות לחברה בשם יק"א, ולמעשה "יצא מהמשחק". 
+	
+	הייתרונות והחסרונות הללו \textbf{יכולים להופיע במבחן}. 
+	
+	\subsection{המשרד הארץ־ישראלי} 
+	מוקם ב־1907 ע"י ההסתדרות הציונית. 
+	פחות סייע להתיישבות בארץ באופן אקטיבי (כן היה את קקל, אוצר התיישבות היהודים וכו') ולא הייתה בארץ נציגות של ההסתדרות הציונית. לאחר מותו של הרצל התקבלה ההחלטה לנקוט בגישה של \textbf{ציונות סינטטית} – שילוב בין ציונות מדינית לציונות מעשית. 
+	
+	ציונית מדינית – לא להיות גנבים בלילה, נקבל צ'רטר. ציונות מעשית – קודם נתיישב, ואז נתעסק עם דברים אחרים. 
+	
+	דה־פקטו, בשנותיה הראשונות, ההסתדרות הציונית פעלה בשונותיה הראשונה פעלה במישור המדיני. המשרד הארץ־ישראלי הוקם ברעיון של ציונות סינטית. 
+	
+	הארגון סייע סהקמת דגניה ות"א. גם סייע בהכשרת עולים בחקלאות, מציאת עבודה, ומעודד עלייה מתימן (פחות רלוונטי לבגרות). שמואל יבניאלי היה נציג שעודד רדים מיהודי תחימן לעלות לארץ (מסיבות ציוניות). 
+	
+	\section{על השפה}
+	שפה היא אחד הגורמים המשמעותיים ביותר לליכוד את בני הלאום. היא מאחדת ע"י ייחוד. לתנועה הציונית אין שפה. דוגמה: גיצד תתאר סלט יירקות, כאשר אין מילה לעבניה ולמלפפון בתנ"ך? גם כל אדם דיבר שפה אחרת. יידיש, לדינו, גרמנית, וכו'. אף אחד לא מדבר עברית, שכן זוהי שפת הקודש, וכמודגם, אין מילים מתאימות. העברית נתפשה כשפת הקודש ועל כן לא התקדמה ביחס לעולם. "הצורך הוא אבי ההמצאה" = לא היה צורך במילה "עגניה" בתנ"ך, ועל כן היא לא קיימת בו. באופן דומה, כן היה שמן זית. אליעזר בן יהודה מגיע לארץ ב־1881 וקידם רבות את השפה העברית ופיתח חלק ניכר, הן מן השפה והן את התפישה של כיבוש השפה – שפה יחודית ללאום היהודי. 
+	
+	אחד הדברים הראשונים שבן־יהודה עשה הוא לדבר בביתו עברית בלבד. אשתו, ובנו (איתמר בן־אבי) דיברו בעברית בלבד ונאסר עליהם לדבר בשפות אחרות. בנו זכה לכינוי "הילד העברי הראשון". להבהרה: אף אחד מהדברים האלו לא נחשב פעילות לקידום השפה (השפה שנו מדבר לא משפיעה על קידום השפה). 
+	
+	שאלה: למה עברית ולא יידיש? אומנם עברית היא שפה מתה, אך היא זו המייחדת את העם היהודי. לתפישת אליעזר בן יהודה, ניתן לקחת את אותה השפה המתה – העברית – ולהחיות אותה. יהודים בכל העולם הכירו את העברית התנ"כית. כמו כן, האמין כי יהודים  אינם יכולים להיות עם החי רק בעזרת השיבה למולדת. החייאת השפה ביטאה את התחייה הלאומית והדביר בעברית את הלכידות להאומית. הוא אומר כי שלושה דברים חרותים על דגל הלאומיות היהודית: ארץ, שפה והשכלה [במקורות אחרים: ארץ, שפה ודגל]. הוא מתייחס למאפיינים המלגדים את בני הלאום. 
+	
+	הוא פועל במגוון צורות: 
+	\begin{itemize}
+		\item כתיבת והוצאת "מילון עברי־עברי"
+		\item הקמת חברת "תחיית ישראל" שאחת ממטרותיה הייתה החייאת השפה העברית כשפת דיבור בחיי היום יום (זה לא קיים היום). 
+		\item חידוש והמצאת מילים רבות כגון עיתון, רכבת, תזמורת, טקס, אופניים, משקפיים, גלידה, צלחת וכרביים. הוא הראשון שעשה זאת אך לא היחיד. 
+		\item הוציא את עיתון "הצבי" שם הפיץ הפיץ את דעותיו והמילים החדשות אותם המציא. 
+		\item הקים את חברת "שפה ברורה" – המוסד העליון לקביעת חידושי הלשון. ממנה, התפתח את "ועד הלשון העברית" שמטרתו הייתה הפצת השפה. זהו אינו מוסד אקדמי, אך מקביל לאקדמיה ללשון העברית, שהיא נגזת של ועד הלשון העברי. 
+	\end{itemize}
+	
+	שפה היא דבר חיי שמתחדש כל הזמ ןבהתאם לשינויים לחברה ובתרבות. דוגמה: המילה "מרשתת". גם מושגים רלוונטים לחידוד והעברת אידיאולוגיות מסויימות. 
+	
+	\subsection{על החינוך}
+	דוגמה לארגונים: בראשון לציון הוקם בית הספר העברי הראשון. הגימנסיה העברית לישורליים. בצלאל, הקונסברטוריון, שמינר לוינסקי להגשת מורים, הטכניון, האונ' העברית ועוד. 
+	
+	מלחמת השפות: ראה שנה שעברה. בחיפה החליטה חברת "עשרה" להקים את הטכניקום (הטכניון של היום). בטכניון מלמדים מקוצעות מדעיים, ו"עזרה" החליטה שהטכניון יילמד בגרמנית, שכן אז נחשבה לשפה הכי גבוהה (בניגוד לאנגלית היום) ומרבית ספרי הלימוד וחומרי הלימוד היו בגרמנית. גם לא היו מושגים בהנגסה בעברית. בעקבות ההחלטה הזו, קבוצה לא קטנה של אנשים (בינהם בטודנטים ובן־יהודה) פתחו במחאה ששמה "מלחמת השפות" (כנד הלימוד בטכניקום בגרמנית). לטענתם, אם אין מילים, נמציא מילים, אך בישראל מלמדים בעברית בלבד. המאבק הצליח – בטכניון מלמדים בעברית. 
+	
+	\ndoc 
+	
+\end{document}

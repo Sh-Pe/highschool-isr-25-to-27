@@ -1,0 +1,148 @@
+%! ~~~ Packages Setup ~~~ 
+\documentclass[]{article}
+\usepackage{lipsum}
+\usepackage{rotating}
+
+
+% Math packages
+\usepackage[usenames]{color}
+\usepackage{forest}
+\usepackage{ifxetex,ifluatex,amssymb,amsmath,mathrsfs,amsthm,witharrows,mathtools,mathdots}
+\usepackage{amsmath}
+\WithArrowsOptions{displaystyle}
+\renewcommand{\qedsymbol}{$\blacksquare$} % end proofs with \blacksquare. Overwrites the defualts. 
+\usepackage{cancel,bm}
+\usepackage[thinc]{esdiff}
+
+
+% Design
+\usepackage[labelfont=bf]{caption}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{multicol}
+\usepackage[skip=4pt, indent=0pt]{parskip}
+\usepackage[normalem]{ulem}
+\forestset{default}
+\renewcommand\labelitemi{$\bullet$}
+\usepackage{titlesec}
+\titleformat{\section}[block]
+{\fontsize{15}{15}}
+{\sen \dotfill (\thesection)\dotfill\she}
+{0em}
+{\MakeUppercase}
+\usepackage{graphicx}
+\graphicspath{ {./} }
+
+\usepackage[colorlinks]{hyperref}
+\definecolor{mgreen}{RGB}{25, 160, 50}
+\definecolor{mblue}{RGB}{30, 60, 200}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    citecolor=mgreen,
+    linkcolor=black,
+    urlcolor=mblue,
+    pdftitle={Document by Shahar Perets},
+    %	pdfpagemode=FullScreen,
+}
+
+% Hebrew initialzing
+\usepackage[bidi=basic]{babel}
+\PassOptionsToPackage{no-math}{fontspec}
+\babelprovide[main, import, Alph=letters]{hebrew}
+\babelprovide[import]{english}
+\babelfont[hebrew]{rm}{David CLM}
+\babelfont[hebrew]{sf}{David CLM}
+%\babelfont[english]{tt}{Monaspace Xenon}
+\usepackage[shortlabels]{enumitem}
+\newlist{hebenum}{enumerate}{1}
+
+% Language Shortcuts
+\newcommand\en[1] {\begin{otherlanguage}{english}#1\end{otherlanguage}}
+\newcommand\he[1] {\she#1\sen}
+\newcommand\sen   {\begin{otherlanguage}{english}}
+    \newcommand\she   {\end{otherlanguage}}
+\newcommand\del   {$ \!\! $}
+
+\newcommand\npage {\vfil {\hfil \textbf{\textit{המשך בעמוד הבא}}} \hfil \vfil \pagebreak}
+\newcommand\ndoc  {\dotfill \\ \vfil {\begin{center}
+            {\textbf{\textit{שחר פרץ, 2025}} \\
+                \scriptsize \textit{קומפל ב־}\en{\LaTeX}\,\textit{ ונוצר באמצעות תוכנה חופשית בלבד}}
+    \end{center}} \vfil	}
+
+\newcommand{\rn}[1]{
+    \textup{\uppercase\expandafter{\romannumeral#1}}
+}
+
+\makeatletter
+\newcommand{\skipitems}[1]{
+    \addtocounter{\@enumctr}{#1}
+}
+\makeatother
+
+
+%! ~~~ Document ~~~
+
+\author{שחר פרץ}
+\title{\textit{חושבים וכותבים ערכים – חלק א'}}
+\begin{document}
+    \maketitle
+    \begin{multicols}{3}
+        \centering
+        \textbf{כיתה} 
+        
+        י'5
+        
+        \textbf{תאריך נתינת העבודה}
+        
+        19.5.2025
+        
+        \textbf{מוגש ל־}
+        
+        הדר פרי אגמון
+    \end{multicols}
+    \large
+    \begin{enumerate}
+        \item \textbf{הצגת הפעילות. }נתבונן בפעילות שהתבצעה במסגרת פעילות חברתית של תוכנית אודיסאה, בירושלים, לפני כמה חודשים. במהלך הפעילות, חולקנו לקבוצות יחדיו עם סטונדטים מאוניברסיטאות אחרות ומשכבות אחרות בחברה שאין אנו מכירים. הפעילות הודרכה ע''י אדם חרדי שעובד ביום־יום בצה''ל בנסיונות לגייס חרדים, ומטרתה הייתה לאפשר לנו להכיר את החברה החרדית לעומק, ואת הקשיים בה. 
+        
+        הפעילות התחילה בשיחה שבה הוא הן הסביר לנו על החברה החרידית, והן הציג את דעתו בנוגע לבעיות בה. התגלגלנו לפולמוס סביב אותן הדעות, כאשר רבים חלקו עליהן (בטענה שהסיבה להתנהגות כזו או אחרת של חרדים שונה ממה שתיאר) מכל מני נימוקים. ראוי לציין שבקבוצה שלנו היו מספר דתיים לאומיים מהאונ' העברית בירושליים, שהתחברתי איתם, והם יכלו להרחיב את השיחה לעולמות הדיון שלהם. 
+        
+        לאחר מכן הלכנו להסתובב בירושלים, להפגש עם מספר ארגונים חרדיים או בשלוב חרידים עם מטרות שונות (הגנה, סיפוק אוכל לנזקקים, שילוב גברים חרדים בעבודות, ועוד). לבסוף חזרנו חזרה לאכסנייה, שם פגשנו פעילה חברתית חרדית־ליטאית הפועלת נגד תקיפות מיניות בחברה. בשיחה איתה, שגם היא הייתה פורה (כלומר, לא רק במסגרת הרצאה, אלא גם שאלות וויכוחים) הביקורת שלה ושל המנחה שלנו הייתה חמורה ביותר, בעיקר כלפי ההנהגה החרדית, עם השוואות חזקות (ומבוססות) לפעילות הכנסייה הקטולית בימי הביניים. 
+        
+        הפעילות הקנתה לי את רוב הידע שיש לי על החברה החרדית. היא אפשרה לי להבין לעומק כיצד ולמה מתבטאות שאנו מתעסקים בהם כמו התנגדות לגיוס, אך גם להבין את רבדיה השונים (והרבים!) ואת דקויותיה של החיים כחרדי. מהפעילות ניכר שהחברה החרדית מפולגת לחלוטין, בעלת הנהגה עשירה השולטת בפועל בעם, ושבעיות כמו התגייסות חרדים אינן נובעות מסיבות כמו התבוללות בלבד (הרי רבים הנשים שעובדות, במיוחד בפלג הליטאי, וכלל שיעור הגברים העובדים גבוהה לאין־מונים משיעור המתגייסים), אלא מקורן בבעיות עמוקות יותר של התנגדות ופחד מהציונות ועוד. 
+        \item \textbf{זיהוי הערכים הרלוונטיים. }מהפעילות שבחרתי, עולים מספר ערכים: 
+        \begin{itemize}
+            \item \textbf{תקשורת והבנה של האחר} – בתור חילוני, להבין את החרדים. 
+            \item \textbf{לאומיות} – איך חרדים מתייחסים לציונות ולערכיה שלה? 
+            \item \textbf{אחדות} – איך נגיע לחברה יהודית מאוחדת? 
+            \item \textbf{מעורבות חברתית ועזרה לאחרים} – בגלל הארגונים שפגשנו בהם אנשים מנסים לעזור ולקדם את החברה ככלל. 
+            \item \textbf{משפחתיות} – התנגדות בתוך החברה החרדית במקרים רבים גוררת התנגדות ואף נידוי מצד המשפחה (פלג אחד לא מכיר בפלג אחר) וישנו קונפליקט משמעותי בין ערך המשפחתיות לערכים אחרים. 
+        \end{itemize}
+        
+        \item \textbf{התייחסות אישית לערכים. }
+        \begin{itemize}
+            \item \textbf{תקשורת והבנה}: אני חושב שזה ערך חשוב, שהכרחתי ע''מ לקיים חברה בריאה ותקינה. חוסר הבנה והכרה מוביל לפילוג לא רצוי שאין צורך שיהיה בחברה, לעיתים אך ורק בגלל קונטקסט ומידע שחסר על הצד השני. 
+            \item \textbf{לאומיות}: אני לא מצדד בערכים לאומיים מהיותם לאומיים גרידא, אך אני מבין ורוצה לשמור (מסיבות אחרות) על קיום מדינת ישראל. ללא המדינה אנו עלולים להיכנס לשואה שנייה, בלי יכולת להגן על עצמנו. 
+            \item \textbf{אחדות}: המין האנושי חזק אך ורק בזכות היכולת שלו לשצף פעולה עם בני אנוש אחרים, לשלב את היכולות של כל אחד ע''מ להגיע לתואצה משותפת ביחד. לשם כך, על האנשים להיות מאוחדים יחדיו. 
+            \item \textbf{מעורבות חברתית ועזרה לאחרים: }רבים האנשים בעולם שצריכים עזרה בשביל לקיים מהלך חיים תקין, ואם ברצוננו להעשיר ולהגדיל את האושר הנאושי, עלינו להתנדב אחרת הם עלולים להפגע. על כךכן, מעורבות חברתית ועזרה לארחים הכרחיים בשביל לקיים חברה תקינה, ואני באופן אישי אפעל לקידום ערך זה. 
+        \end{itemize}
+        \item \textbf{רעיונות להתמודדות נוספת. }עלו לפחות שתי סוגיות מרכזיות, ואציג שני רעיונות והתמודד עם שתיהן: 
+        \begin{itemize}
+            \item הראשונה – הנהגת החברה החרדית, שגורמת לחברה להתנהג כמעין ``מובלעה'' בתוך החברה הדמוקרטית שלנו, וליצור חזרה נפרדת לחלוטין בה אין חופש מידע, חופש דיון והרבנים מייצגים את האמת היחידה. 
+            \begin{itemize}
+                \item פתרונות שעלו: באופן טבעי, היום לכל החרדים יש יותר גישה למידע משהיה בעבר. אותה הפעילה שדיברה איתנו טענה שנכון להיום, דברים שהיא כותבת מופצים באמצעות מיילים ולחץ על העיתונות (אחת שעיתון זניח קיבל רייטינג משמעותי מפרסום מעלליו של רב מסוים בתלמידיו, עיתונים אחרים נכנעו לאופיים הקפיטליסטי ופרסמו חלק ניכר מידיעותיה גם, אל־אף שנראת כחותרת ע''פ רבנים מסויימים). נוסף על כך, בפלגים מסויימים נשים מעורבות לחלוטין בחברה המוגרנית ובהיי־טק. כל זאת ועוד שובר לאט־לאט אך בעעקביות את האיסור על חופש המידע, ואת המונופול של האבנים על כל המידע שזמין עבור נתיניהם, ובכך מאפשר קיום התנגדויות ושינויים הבאים מהעם. 
+                
+                סיכום: להשתמש במדיה שיש לחרדים (מיילים, עיתונים וכו') כדי לפרוץ ולהראות להם את העולם בחוץ. 
+                \item לפעול באופן חוקתי כנגד מעשים לא מאוד חוקיים שפוגעים בדמוקטיה בחברה החרדית. 
+            \end{itemize}
+            \item השנייה – ההתנגדות של החברה החרדית להשתלבות בחרה בציונית, וראייתה שלה כחלק נפרד שלא קשור לחברה הציונית. 
+            \begin{itemize}
+                \item קיום וקידום אירועים כמו יום הזכרון, שבחברה החרדית יש להם קונטציה ציונית חלשה מספיק כדי לקרב אותם לשאר החברה. 
+                \item הסברה ונימוק להיותנו ולצכרינו להיות בארץ ישראל ממנעים תועלתניים והגיוניים, ולא לאומיים, וגיוס ושכנוע רבנים שיצודדו בכך. 
+            \end{itemize}
+        \end{itemize}
+    \end{enumerate}
+    
+    
+    
+    \ndoc
+\end{document}

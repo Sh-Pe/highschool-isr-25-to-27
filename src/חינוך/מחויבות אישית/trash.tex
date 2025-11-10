@@ -1,0 +1,130 @@
+%! ~~~ Packages Setup ~~~ 
+\documentclass[]{article}
+\usepackage{lipsum}
+\usepackage{rotating}
+
+
+% Math packages
+\usepackage[usenames]{color}
+\usepackage{forest}
+\usepackage{ifxetex,ifluatex,amssymb,amsmath,mathrsfs,amsthm,witharrows,mathtools,mathdots}
+\usepackage{amsmath}
+\WithArrowsOptions{displaystyle}
+\renewcommand{\qedsymbol}{$\blacksquare$} % end proofs with \blacksquare. Overwrites the defualts. 
+\usepackage{cancel,bm}
+\usepackage[thinc]{esdiff}
+
+
+% tikz
+\usepackage{tikz}
+\usetikzlibrary{graphs}
+\newcommand\sqw{1}
+\newcommand\squ[4][1]{\fill[#4] (#2*\sqw,#3*\sqw) rectangle +(#1*\sqw,#1*\sqw);}
+
+
+% Design
+\usepackage[labelfont=bf]{caption}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{multicol}
+\usepackage[skip=4pt, indent=0pt]{parskip}
+\usepackage[normalem]{ulem}
+\forestset{default}
+\renewcommand\labelitemi{$\bullet$}
+\usepackage{titlesec}
+\titleformat{\section}[block]
+{\fontsize{15}{15}}
+{\sen \dotfill (\thesection)\dotfill\she}
+{0em}
+{\MakeUppercase}
+\usepackage{graphicx}
+\graphicspath{ {./} }
+
+
+% Hebrew initialzing
+\usepackage[bidi=basic]{babel}
+\PassOptionsToPackage{no-math}{fontspec}
+\babelprovide[main, import, Alph=letters]{hebrew}
+\babelprovide[import]{english}
+\babelfont[hebrew]{rm}{David CLM}
+\babelfont[hebrew]{sf}{David CLM}
+%\babelfont[english]{tt}{Monaspace Xenon}
+\usepackage[shortlabels]{enumitem}
+\newlist{hebenum}{enumerate}{1}
+
+% Language Shortcuts
+\newcommand\en[1] {\begin{otherlanguage}{english}#1\end{otherlanguage}}
+\newcommand\he[1] {\she#1\sen}
+\newcommand\sen   {\begin{otherlanguage}{english}}
+    \newcommand\she   {\end{otherlanguage}}
+\newcommand\del   {$ \!\! $}
+
+\newcommand\npage {\vfil {\hfil \textbf{\textit{המשך בעמוד הבא}}} \hfil \vfil \pagebreak}
+\newcommand\ndoc  {\dotfill \\ \vfil {\begin{center}
+            {\textbf{\textit{שחר פרץ, 2025}} \\
+                \scriptsize \textit{קומפל ב־}\en{\LaTeX}\,\textit{ ונוצר באמצעות תוכנה חופשית בלבד}}
+    \end{center}} \vfil	}
+
+\newcommand{\rn}[1]{
+    \textup{\uppercase\expandafter{\romannumeral#1}}
+}
+
+\makeatletter
+\newcommand{\skipitems}[1]{
+    \addtocounter{\@enumctr}{#1}
+}
+\makeatother
+
+
+%! ~~~ Document ~~~
+\renewcommand{\baselinestretch}{1.35} 
+
+\author{שחר פרץ}
+\title{\textit{רפלקציה – מחוייבות אישית}}
+\begin{document}
+    \maketitle
+    
+    \large
+    \begin{multicols}{4}
+        \centering\textbf{שם: }\\שחר פרץ 
+        \columnbreak
+        
+        \textbf{ת.ז.: }\\334558962
+        \columnbreak
+        
+        \textbf{כיתה: }\\י'5
+        \columnbreak
+        
+        \textbf{שם המחנכת: }\\הדר פרי אגמון
+    \end{multicols}
+    
+    
+    במהלך השנה שעברה, ניסיתי לבחור את ההתנסות האישית הנכונה בעבורי. מספר רעיונות עלו, ביניהם עבודה במשק בכפר, עבודה בספרייה בישוב שלי (אמי ספרנית וכן אני אוהב ספרים), ועוד. לבסוף, החלטתי ללכת לנבחרת הרובוטיקה של בית הספר שלי, הכפר הירוק, שמה GreenBlitz – ולעשות כמיטב יכולתי לייצג את הקהילה שלי, קהילת הכפר הירוק, בארץ ובעולם. נבחרת הרובוטיקה הוצגה ע''י חבריה במגוון אירועים שונים וימי מוקד שערך בית הספר. 
+    
+    במסגרת ההתנסות שלי במקום עבדתי על מספר פרויקטים הקשורים ליכולתו של הרובוט לזהות את הסביבה סביבו ואת מיקומו בה. בגלל האופי של ההתנסות – נבחרת רובוטיקה שמייצרת, מתכננת מתחכנתת רובוט בטו בעזרת חבריה, התלמידים בבית הספר, כל פרויקט חדש מציב אתגרים חדשים שלא תמיד נפתרו ע''י אנשים שאני מכיר ועל כן זוהי חוויה יחודית באופי הבעיה ובדרך פתרונה. 
+    
+    לקראת סוף השנה, אני וגיל שטיין (תלמיד אחר מכיתה י''ב) הצלחנו להגיע למצב שהרובוט יודע במגרש בגודל עשרות מטרים רבועים את מקומו בדיוק ברמת הסנטימטר, מה שאפשר לנו לבצע אוטומציות רבות ולבסוף אף להגיע למקומות מרשימים בתחרות ואף לטוס עוד חודשיים לייצג את ישראל בתחרות עולמית באינדיאנה. לראשונה עבדתי כחלק מ־codebase גדול, והייתי צריך לגרום לחלקי צד שלישי רבים לפעול, גם כאלו שאינם מתועדים כמו שצריך ועלי להבין לבד את אופן פעילותם. נוסף על כך, עבודה על קוד כוללת היבטים של רבים תקשורת בקבוצה גדולה, שכמובן באים יחד עם בעיות ארגוניות ומבניות – איך מתקשרים עם צוותי פיתוח אחרים? כיצד אנשים עוד כמה שנים יוכלו להבין את הקוד שעבדתי עליו? איך מה שאני עושה מתממשק עם מערכות אחרות, ואיך הוא משפיע עליהן? ולמרות חילוקי דעות רבים, תמיד הצלחנו להגיע להסכמה ולמצוא פתרונות לכל הבעיות שצצו בדרך. 
+    
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.45\linewidth]{"../../../Downloads/week 8-24"}
+        \caption{שיחה בזמן פיתוח תוכנה}
+        \label{fig:week-8-24}
+    \end{figure}
+    
+    
+    פרט לכך, הנבחרת תורמת לקהילה במגוון דרכים שונות נוספות, שלקחתי בהן חלק. ביניהן, מינטור והפעלה של קבוצות רובוטיקה אחרות עם תלמידים יותר צעירים או פחות מנוסים (כמו GTC שנמצאת באמיס), הפעלת פעילויות במרכז אנוש (העמותה הישראלית למתמודדי בריאות הנפש), גיוס והתרמה לחולי ALS ומחקר בתחום (במסגרת מרוץ החברים שנערך ברמת השרון), ועוד. בפעילויות אלו אנחנו מציגים את הרובוט לאנשים, מלמדים אותם ומעוררים בהם עניין בתחומי הרובוטיקה, ולפעמים אך מעודדים אותם ומפעימים בהם עניין נוסף מסדר יומם. כמות הנערים והילדים שעוררנו בהם עניין והכנסנו לתוכניות FIRST, הארגון בו אנו פועלים המספק מסגרת לפעילויות ונבחרות רובוטיקה שונות לאנשים מכל הגילאים, גדולה בסדר גודל רחב מכמות חברי הקבוצה שלנו עצמה. בכך, אנחנו מפיצים חינוך STEM ברחבי הארץ והעולם ועוזרים לבניית דור העתיד. 
+    
+    הנבחרת פועלת כמקשה אחת, ובה מגוון אנשים ממגוון רחב של תחומים – צילום ועריכת ווידאו, תכנות מגנונים, תכנות אתרים, עיבוד תמונה, מידול, ייצור חלקים והרכבה, אלקטרוניקה, ועוד – כולם חיוניים והכרחיים לבניית רובוט תחרותי שעובד במהירות ובדיוק. 
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.45\linewidth]{"../../../Downloads/DCMP 2025-006"}
+        \caption{כל הקבוצה לאחר סיום התחרות הארצית}
+        \label{fig:dcmp-2025-006}
+    \end{figure}
+    
+    לסיכום, במהלך השנה האחרונה כחלק מהתנסותי האישית, מצאתי את עצמי מתנדב ועוזר לאנשים רבים, עובד בקבוצה ופותר פתרונות, ומייצג את הקהילה שלי ברחבי הארץ ואף בעולם. 
+    
+    
+    
+    
+\end{document}

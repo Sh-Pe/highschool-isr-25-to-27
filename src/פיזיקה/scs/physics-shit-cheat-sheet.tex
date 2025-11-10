@@ -1,0 +1,343 @@
+%! ~~~ Packages Setup ~~~ 
+\documentclass[]{article}
+\usepackage{lipsum}
+\usepackage{rotating}
+
+
+% Math packages
+\usepackage[usenames]{color}
+\usepackage{forest}
+\usepackage{ifxetex,ifluatex,amssymb,amsmath,mathrsfs,amsthm,witharrows,mathtools,mathdots}
+\usepackage{amsmath}
+\WithArrowsOptions{displaystyle}
+\renewcommand{\qedsymbol}{$\blacksquare$} % end proofs with \blacksquare. Overwrites the defualts. 
+\usepackage{cancel,bm}
+\usepackage[thinc]{esdiff}
+
+
+% tikz
+\usepackage{tikz}
+\usetikzlibrary{graphs}
+\newcommand\sqw{1}
+\newcommand\squ[4][1]{\fill[#4] (#2*\sqw,#3*\sqw) rectangle +(#1*\sqw,#1*\sqw);}
+
+
+% code 
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.35,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codenumber}{rgb}{0.1,0.3,0.5}
+\definecolor{codeblue}{rgb}{0,0,0.5}
+\definecolor{codered}{rgb}{0.5,0.03,0.02}
+\definecolor{codegray}{rgb}{0.96,0.96,0.96}
+
+\lstdefinestyle{pythonstylesheet}{
+	language=Java,
+	emphstyle=\color{deepred},
+	backgroundcolor=\color{codegray},
+	keywordstyle=\color{deepblue}\bfseries\itshape,
+	numberstyle=\scriptsize\color{codenumber},
+	basicstyle=\ttfamily\footnotesize,
+	commentstyle=\color{codegreen}\itshape,
+	breakatwhitespace=false, 
+	breaklines=true, 
+	captionpos=b, 
+	keepspaces=true, 
+	numbers=left, 
+	numbersep=5pt, 
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false, 
+	tabsize=4, 
+	morekeywords={as,assert,nonlocal,with,yield,self,True,False,None,AssertionError,ValueError,in,else},              % Add keywords here
+	keywordstyle=\color{codeblue},
+	emph={var, List, Iterable, Iterator},          % Custom highlighting
+	emphstyle=\color{codered},
+	stringstyle=\color{codegreen},
+	showstringspaces=false,
+	abovecaptionskip=0pt,belowcaptionskip =0pt,
+	framextopmargin=-\topsep, 
+}
+\newcommand\pythonstyle{\lstset{pythonstylesheet}}
+\newcommand\pyl[1]     {{\lstinline!#1!}}
+\lstset{style=pythonstylesheet}
+
+\usepackage[style=1,skipbelow=\topskip,skipabove=\topskip,framemethod=TikZ]{mdframed}
+\definecolor{bggray}{rgb}{0.85, 0.85, 0.85}
+\mdfsetup{leftmargin=0pt,rightmargin=0pt,innerleftmargin=15pt,backgroundcolor=codegray,middlelinewidth=0.5pt,skipabove=5pt,skipbelow=0pt,middlelinecolor=black,roundcorner=5}
+\BeforeBeginEnvironment{lstlisting}{\begin{mdframed}\vspace{-0.4em}}
+	\AfterEndEnvironment{lstlisting}{\vspace{-0.8em}\end{mdframed}}
+
+
+% Deisgn
+\usepackage[labelfont=bf]{caption}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{multicol}
+\usepackage[skip=4pt, indent=0pt]{parskip}
+\usepackage[normalem]{ulem}
+\forestset{default}
+\renewcommand\labelitemi{$\bullet$}
+\usepackage{titlesec}
+\titleformat{\section}[block]
+{\fontsize{20}{40}}
+{\large\dotfill \Large(\thesection)\large \dotfill}
+{0em}
+{\vspace{2pt} \newline \hfil \large \filleft \filright \MakeUppercase}
+\usepackage{graphicx}
+\graphicspath{ {./} }
+
+
+\newcommand\ndoc  {\dotfill \\ \vfil {\begin{center}
+            {\textbf{Shahar Perets, \textit{2025}} \\
+                \scriptsize {Compiled With \LaTeX \, and Made Using Free Software}}
+    \end{center}} \vfil	}
+
+%! ~~~ Math shortcuts ~~~
+
+% Letters shortcuts
+\newcommand\N     {\mathbb{N}}
+\newcommand\Z     {\mathbb{Z}}
+\newcommand\R     {\mathbb{R}}
+\newcommand\Q     {\mathbb{Q}}
+\newcommand\C     {\mathbb{C}}
+\newcommand\One   {\mathit{1}}
+
+\newcommand\ml    {\ell}
+\newcommand\mj    {\jmath}
+\newcommand\mi    {\imath}
+
+\newcommand\powerset {\mathcal{P}}
+\newcommand\ps    {\mathcal{P}}
+\newcommand\pc    {\mathcal{P}}
+\newcommand\ac    {\mathcal{A}}
+\newcommand\bc    {\mathcal{B}}
+\newcommand\cc    {\mathcal{C}}
+\newcommand\dc    {\mathcal{D}}
+\newcommand\ec    {\mathcal{E}}
+\newcommand\fc    {\mathcal{F}}
+\newcommand\nc    {\mathcal{N}}
+\newcommand\vc    {\mathcal{V}} % Vance
+\newcommand\sca   {\mathcal{S}} % \sc is already definded
+\newcommand\rca   {\mathcal{R}} % \rc is already definded
+
+\newcommand\Si    {\Sigma}
+
+% Set theory shortcuts
+\newcommand\ra    {\rangle}
+\newcommand\la    {\langle}
+
+\newcommand\oto   {\leftarrow}
+% Math A&B shortcuts
+\newcommand\logn  {\log n}
+\newcommand\logx  {\log x}
+\newcommand\lnx   {\ln x}
+\newcommand\cosx  {\cos x}
+\newcommand\cost  {\cos \theta}
+\newcommand\sinx  {\sin x}
+\newcommand\sint  {\sin \theta}
+\newcommand\tanx  {\tan x}
+\newcommand\tant  {\tan \theta}
+\newcommand\sex   {\sec x}
+\newcommand\sect  {\sec^2}
+\newcommand\cotx  {\cot x}
+\newcommand\cscx  {\csc x}
+\newcommand\sinhx {\sinh x}
+\newcommand\coshx {\cosh x}
+\newcommand\tanhx {\tanh x}
+
+\newcommand\seq   {\overset{!}{=}}
+\newcommand\peq   {\overset{*}{=}}
+\newcommand\slh   {\overset{LH}{=}}
+\newcommand\sle   {\overset{!}{\le}}
+\newcommand\sge   {\overset{!}{\ge}}
+\newcommand\sll   {\overset{!}{<}}
+\newcommand\sgg   {\overset{!}{>}}
+
+\DeclareMathOperator{\sech}   {sech}
+\DeclareMathOperator{\csch}   {csch}
+\DeclareMathOperator{\arcsec} {arcsec}
+\DeclareMathOperator{\arccot} {arcCot}
+\DeclareMathOperator{\arccsc} {arcCsc}
+\DeclareMathOperator{\arccosh}{arccosh}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\arcsech}{arcsech}
+\DeclareMathOperator{\arccsch}{arccsch}
+\DeclareMathOperator{\arccoth}{arccoth}
+\DeclareMathOperator{\atant}  {atan2} 
+
+\newcommand\dx    {\,\mathrm{d}x}
+\newcommand\dt    {\,\mathrm{d}t}
+\newcommand\ds    {\,\mathrm{d}s}
+\newcommand\dtt   {\,\mathrm{d}\theta}
+\newcommand\du    {\,\mathrm{d}u}
+\newcommand\dv    {\,\mathrm{d}v}
+\newcommand\df    {\mathrm{d}f}
+\newcommand\dfdx  {\diff{f}{x}}
+\newcommand\dit   {\limhz \frac{f(x + h) - f(x)}{h}}
+
+\renewcommand\inf {\infty}
+\newcommand  \ninf{-\inf}
+
+% Greek Letters
+\newcommand\ag        {\alpha}
+\newcommand\bg        {\beta}
+\newcommand\cg        {\gamma}
+\newcommand\dg        {\delta}
+\newcommand\eg        {\epsi}
+\newcommand\zg        {\zeta}
+\newcommand\hg        {\eta}
+\newcommand\tg        {\theta}
+\newcommand\ig        {\iota}
+\newcommand\kg        {\keppa}
+\renewcommand\lg      {\lambda}
+\newcommand\og        {\omicron}
+\newcommand\rg        {\rho}
+\newcommand\sg        {\sigma}
+\newcommand\yg        {\usilon}
+\newcommand\wg        {\omega}
+
+\newcommand\Ag        {\Alpha}
+\newcommand\Bg        {\Beta}
+\newcommand\Cg        {\Gamma}
+\newcommand\Dg        {\Delta}
+\newcommand\Eg        {\Epsi}
+\newcommand\Zg        {\Zeta}
+\newcommand\Hg        {\Eta}
+\newcommand\Tg        {\Theta}
+\newcommand\Ig        {\Iota}
+\newcommand\Kg        {\Keppa}
+\newcommand\Lg        {\Lambda}
+\newcommand\Og        {\Omicron}
+\newcommand\Rg        {\Rho}
+\newcommand\Sg        {\Sigma}
+\newcommand\Yg        {\Usilon}
+\newcommand\Wg        {\Omega}
+
+\newcommand\set   {\ell et \text{ }}
+\newcommand\tl    {\tilde}
+\newcommand\op    {^{-1}}
+
+\newcommand\co        {\colon}
+\newcommand\sof[1]    {\left | #1 \right |}
+\newcommand\cl [1]    {\left ( #1 \right )}
+\newcommand\csb[1]    {\left [ #1 \right ]}
+\newcommand\ccb[1]    {\left \{ #1 \right \}}
+\newcommand\norm[1]   {\left \vert \left \vert #1 \right \vert \right \vert}
+
+
+%! ~~~ Document ~~~
+
+\author{Shahar Perets}
+\title{Physics Shit Cheat Sheet}
+\begin{document}
+	\begin{multicols}{3}
+		\section{Mechanics}
+		\[ v = \frac{\dx}{\dt} \]
+		\[ a = \frac{\dv}{\dt} \]
+        Where $\bar v$ is the average velocity:
+		\[ \bar v = \frac{\Dg x}{\Dg t} \]
+        In a constant acceleration:
+		\begin{align*}
+			v &= v_0 + at \\
+			x &= x_0 + v_0t + \frac{1}{2}at^2 \\
+			x &= x_0 + \frac{v_0 + v}{2}t \\
+			\norm{v} &= \sqrt{v_0^2 + 2a(x - x_0)} 
+		\end{align*}
+		
+		\section{Forces}
+		\[ F_g = mg \]
+		\[ F_{sp} = k \, \Dg \ell \]
+		\[ f_s \le \mu_s N \]
+		\[ f_k = \mu_k N \]
+        \textbf{Newton's laws: }
+        \begin{enumerate}
+            \item A body remains at rest, or in motion at a constant speed in a straight line, unless it is acted upon by a force. 
+            \item \hfil $ \sum \vec F = m \vec a $
+            \item If two bodies exert forces $\vec F_1, \vec F_2$ on each other, then $\vec F_1 = -\vec F_2$.
+        \end{enumerate}
+        
+		\section{Energy}
+		\[ W = \int \vec F(s) \ds \]
+		\begin{gather*}
+			(\exists c, \tg\, \forall t \co |F(t)| = c, \, \measuredangle F(t) = \tg) \\
+			\implies W = F_x \cdot \Dg x = F\cost \Dg s
+		\end{gather*}
+		\[ E_k = \frac{1}{2}m\norm{v}^2 \]
+		\[ U_g = mgh \]
+		\[ U_{sp} = \frac{1}{2}k(\Dg \ell)^2 \]
+		\[ {E_k}_1 + {U_g}_1 = {E_k}_2 + {U_g}_2 \]
+        \[ \textstyle \forall i, j \co \, \cl{\sum E}_i = \cl{\sum E}_j \]
+		\[ W_F = \Dg E = E_{\mathrm{final}} - E_{\mathrm{begining}} \]
+        
+        \columnbreak
+		
+		\section{Rotational Movement}
+		\[ f = \frac{1}{T} \quad \csb{\mathrm{Hz}} \]
+		\[ L = r \psi_{\mathrm{rad}} \]
+		\[ \wg = 2\pi \. f = \frac{2\pi}{T} \]
+		\[ v \peq \frac{2\pi r}{T} \]
+		\[ \bar \wg = \frac{\Dg \theta}{\Dg t} \]
+		\[ v = \wg r \]
+		\[ a_R = \frac{v^2}{r} = \wg^2 r \]
+		\[ P = 2\pi r \]
+		Critical Velocity at max.: 
+		\[ N = 0 \iff v = \sqrt{gr} \]
+		\[ a_T = -g \sin \ag \]
+		\[ \vec a = \vec a_T + \vec a_r \]
+		\[ |a| = \sqrt{a_T^2 + a_R^2} \]
+		\[ \tant = \frac{|a_T|}{|a_R|} \]
+        
+		\section{Gravity}
+		\[ \cl{\frac{\bar r_1}{\bar r_2}} ^3= \cl{\frac{T_1}{T_2}}^2 \]
+		\[ F_g = G \, \frac{Mm}{r^2} \]
+		\[ U_G = - \frac{G Mm}{r} \]
+        \[ (W_g)_{A \to B} \peq GMm\cl{\frac{1}{r_A} - \frac{1}{r_B}} \]
+        \[ \rho = \frac{m}{v} \]
+		In a circular motion: 
+        \[ E_k = \frac{GMm}{2r} = - \frac{U_G}{2} \]
+        \begin{align*}
+            \textstyle \sum E_{\text{mechanic}} \displaystyle &= E_k + U_G \\
+            &=  -\frac{GMm}{2r} = -E_k
+        \end{align*}
+        \[ T \peq \frac{2\pi r}{v} \peq 2\pi\sqrt{\frac{r^3}{GM}} \]
+        
+        \columnbreak
+        
+        \textbf{Kepler's laws of planetary motion: }
+        \begin{enumerate}
+            \item The orbit of a planet is an ellipse
+            \item A line segment joining a planet and the Sun sweeps out equal areas during equal intervals of time.
+            \item For a given gravitational system: 
+            \[ \exists c \, \forall i \co \frac{T_i^2}{r_i^3} = c \peq \frac{4\pi^2}{GM} \]
+        \end{enumerate}
+		
+		\section{Momentum}
+		\[ \vec p = m \vec v \quad \csb{N \sec} \sim \csb{\frac{\mathrm{kg}\,m}{\sec}}  \]
+		\[ \vec J = \int F \dt \seq \vec F \cdot \Dg \vec t = \sof{\vec F} \sof{\Dg \vec t} \cos\theta \]
+		\[ \vec J_{\Sigma F} = \sum_{i = 1}^{n}\vec J_{F_i} = \Dg \vec p \]
+		\[ \forall t_1, t_2 \in \R \co \sum_{i = 1}^{n} \vec p_i(t_1) = \sum_{i = 1}^{n}\vec p_i(t_2) \]
+		In an inelastic collision: 
+		\[ Q = \Dg E_k \]
+		In an elastic collision, where $v_i$ before collision and $u_i$ after it: 
+		\[ \vec v_1 - \vec v_2 = -(\vec u_1 - \vec u_2) \]
+        
+        Elastic Collision iff no loss of kinetic energy, Inelastic iff not ecstatic.  
+        
+        \section{Constants}
+        \begin{center}
+            \begin{tabular}{|c|c|c|}
+                \hline $M \,[kg]$ & $R \,[m]$ & Obj \\
+                \hline $5.974\cdot 10^{24}$ & $6.38\cdot 10^{6}$ &Earth \\
+                \hline $1.99 \cdot 10^{30}$ & $6.96 \cdot 10^{8}$ & Sun \\
+                \hline $7.35 \cdot 10^{22}$ & $1.74 \cdot 10^{6}$ & Moon \\
+                \hline
+            \end{tabular}
+        \end{center}
+        \[ G = 6.67 \cdot 10^{-11} \frac{\mathrm{N}m^2}{\mathrm{kg}} \]
+	\end{multicols}
+	\ndoc
+	
+\end{document}

@@ -1,0 +1,593 @@
+%! ~~~ Packages Setup ~~~ 
+\documentclass[]{article}
+\usepackage{lipsum}
+\usepackage{rotating}
+
+
+% Math packages
+\usepackage[usenames]{color}
+\usepackage{forest}
+\usepackage{ifxetex,ifluatex,amssymb,amsmath,mathrsfs,amsthm,witharrows,mathtools,mathdots}
+\usepackage{amsmath}
+\WithArrowsOptions{displaystyle}
+\renewcommand{\qedsymbol}{$\blacksquare$} % end proofs with \blacksquare. Overwrites the defualts. 
+\usepackage{cancel,bm}
+\usepackage[thinc]{esdiff}
+
+
+% tikz
+\usepackage{tikz}
+\usetikzlibrary{graphs}
+\newcommand\sqw{1}
+\newcommand\squ[4][1]{\fill[#4] (#2*\sqw,#3*\sqw) rectangle +(#1*\sqw,#1*\sqw);}
+
+
+% code 
+\usepackage{algorithm2e}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.35,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codenumber}{rgb}{0.1,0.3,0.5}
+\definecolor{codeblue}{rgb}{0,0,0.5}
+\definecolor{codered}{rgb}{0.5,0.03,0.02}
+\definecolor{codegray}{rgb}{0.96,0.96,0.96}
+
+\lstdefinestyle{pythonstylesheet}{
+    language=Java,
+    emphstyle=\color{deepred},
+    backgroundcolor=\color{codegray},
+    keywordstyle=\color{deepblue}\bfseries\itshape,
+    numberstyle=\scriptsize\color{codenumber},
+    basicstyle=\ttfamily\footnotesize,
+    commentstyle=\color{codegreen}\itshape,
+    breakatwhitespace=false, 
+    breaklines=true, 
+    captionpos=b, 
+    keepspaces=true, 
+    numbers=left, 
+    numbersep=5pt, 
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false, 
+    tabsize=4, 
+    morekeywords={as,assert,nonlocal,with,yield,self,True,False,None,AssertionError,ValueError,in,else},              % Add keywords here
+    keywordstyle=\color{codeblue},
+    emph={var, List, Iterable, Iterator},          % Custom highlighting
+    emphstyle=\color{codered},
+    stringstyle=\color{codegreen},
+    showstringspaces=false,
+    abovecaptionskip=0pt,belowcaptionskip =0pt,
+    framextopmargin=-\topsep, 
+}
+\newcommand\pythonstyle{\lstset{pythonstylesheet}}
+\newcommand\pyl[1]     {{\lstinline!#1!}}
+\lstset{style=pythonstylesheet}
+
+\usepackage[style=1,skipbelow=\topskip,skipabove=\topskip,framemethod=TikZ]{mdframed}
+\definecolor{bggray}{rgb}{0.85, 0.85, 0.85}
+\mdfsetup{leftmargin=0pt,rightmargin=0pt,innerleftmargin=15pt,backgroundcolor=codegray,middlelinewidth=0.5pt,skipabove=5pt,skipbelow=0pt,middlelinecolor=black,roundcorner=5}
+\BeforeBeginEnvironment{lstlisting}{\begin{mdframed}\vspace{-0.4em}}
+    \AfterEndEnvironment{lstlisting}{\vspace{-0.8em}\end{mdframed}}
+
+
+% Deisgn
+\usepackage[labelfont=bf]{caption}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{multicol}
+\usepackage[skip=4pt, indent=0pt]{parskip}
+\usepackage[normalem]{ulem}
+\forestset{default}
+\renewcommand\labelitemi{$\bullet$}
+\usepackage{graphicx}
+\graphicspath{ {./} }
+
+\usepackage[colorlinks]{hyperref}
+\definecolor{mgreen}{RGB}{25, 160, 50}
+\definecolor{mblue}{RGB}{30, 60, 200}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    citecolor=mgreen,
+    linkcolor=black,
+    urlcolor=mblue,
+    pdftitle={Document by Shahar Perets},
+    %	pdfpagemode=FullScreen,
+}
+
+
+% Hebrew initialzing
+\usepackage[bidi=basic]{babel}
+\PassOptionsToPackage{no-math}{fontspec}
+\babelprovide[main, import, Alph=letters]{hebrew}
+\babelprovide[import]{english}
+\babelfont[hebrew]{rm}{David CLM}
+\babelfont[hebrew]{sf}{David CLM}
+%\babelfont[english]{tt}{Monaspace Xenon}
+\usepackage[shortlabels]{enumitem}
+\newlist{hebenum}{enumerate}{1}
+
+% Language Shortcuts
+\newcommand\en[1] {\begin{otherlanguage}{english}#1\end{otherlanguage}}
+\newcommand\he[1] {\she#1\sen}
+\newcommand\sen   {\begin{otherlanguage}{english}}
+    \newcommand\she   {\end{otherlanguage}}
+\newcommand\del   {$ \!\! $}
+
+\newcommand\npage {\vfil {\hfil \textbf{\textit{המשך בעמוד הבא}}} \hfil \vfil \pagebreak}
+\newcommand\ndoc  {\dotfill \\ \vfil {\begin{center}
+            {\textbf{\textit{שחר פרץ, 2025}} \\
+                \scriptsize \textit{קומפל ב־}\en{\LaTeX}\,\textit{ ונוצר באמצעות תוכנה חופשית בלבד}}
+    \end{center}} \vfil	}
+
+\newcommand{\rn}[1]{
+    \textup{\uppercase\expandafter{\romannumeral#1}}
+}
+
+\makeatletter
+\newcommand{\skipitems}[1]{
+    \addtocounter{\@enumctr}{#1}
+}
+\makeatother
+
+%! ~~~ Math shortcuts ~~~
+
+% Letters shortcuts
+\newcommand\N     {\mathbb{N}}
+\newcommand\Z     {\mathbb{Z}}
+\newcommand\R     {\mathbb{R}}
+\newcommand\Q     {\mathbb{Q}}
+\newcommand\C     {\mathbb{C}}
+\newcommand\One   {\mathit{1}}
+
+\newcommand\ml    {\ell}
+\newcommand\mj    {\jmath}
+\newcommand\mi    {\imath}
+
+\newcommand\powerset {\mathcal{P}}
+\newcommand\ps    {\mathcal{P}}
+\newcommand\pc    {\mathcal{P}}
+\newcommand\ac    {\mathcal{A}}
+\newcommand\bc    {\mathcal{B}}
+\newcommand\cc    {\mathcal{C}}
+\newcommand\dc    {\mathcal{D}}
+\newcommand\ec    {\mathcal{E}}
+\newcommand\fc    {\mathcal{F}}
+\newcommand\nc    {\mathcal{N}}
+\newcommand\vc    {\mathcal{V}} % Vance
+\newcommand\sca   {\mathcal{S}} % \sc is already definded
+\newcommand\rca   {\mathcal{R}} % \rc is already definded
+
+\newcommand\prm   {\mathrm{p}}
+\newcommand\arm   {\mathrm{a}} % x86
+\newcommand\brm   {\mathrm{b}}
+\newcommand\crm   {\mathrm{c}}
+\newcommand\drm   {\mathrm{d}}
+\newcommand\erm   {\mathrm{e}}
+\newcommand\frm   {\mathrm{f}}
+\newcommand\nrm   {\mathrm{n}}
+\newcommand\vrm   {\mathrm{v}}
+\newcommand\srm   {\mathrm{s}}
+\newcommand\rrm   {\mathrm{r}}
+
+\newcommand\Si    {\Sigma}
+
+% Logic & sets shorcuts
+\newcommand\siff  {\longleftrightarrow}
+\newcommand\ssiff {\leftrightarrow}
+\newcommand\so    {\longrightarrow}
+\newcommand\sso   {\rightarrow}
+
+\newcommand\epsi  {\epsilon}
+\newcommand\vepsi {\varepsilon}
+\newcommand\vphi  {\varphi}
+\newcommand\Neven {\N_{\mathrm{even}}}
+\newcommand\Nodd  {\N_{\mathrm{odd }}}
+\newcommand\Zeven {\Z_{\mathrm{even}}}
+\newcommand\Zodd  {\Z_{\mathrm{odd }}}
+\newcommand\Np    {\N_+}
+
+% Text Shortcuts
+\newcommand\open  {\big(}
+\newcommand\qopen {\quad\big(}
+\newcommand\close {\big)}
+\newcommand\also  {\mathrm{, }}
+\newcommand\defis {\mathrm{ definitions}}
+\newcommand\given {\mathrm{given }}
+\newcommand\case  {\mathrm{if }}
+\newcommand\syx   {\mathrm{ syntax}}
+\newcommand\rle   {\mathrm{ rule}}
+\newcommand\other {\mathrm{else}}
+\newcommand\set   {\ell et \text{ }}
+\newcommand\ans   {\mathscr{A}\!\mathit{nswer}}
+
+% Set theory shortcuts
+\newcommand\ra    {\rangle}
+\newcommand\la    {\langle}
+
+\newcommand\oto   {\leftarrow}
+
+\newcommand\QED   {\quad\quad\mathscr{Q.E.D.}\;\;\blacksquare}
+\newcommand\QEF   {\quad\quad\mathscr{Q.E.F.}}
+\newcommand\eQED  {\mathscr{Q.E.D.}\;\;\blacksquare}
+\newcommand\eQEF  {\mathscr{Q.E.F.}}
+\newcommand\jQED  {\mathscr{Q.E.D.}}
+
+\DeclareMathOperator\dom   {dom}
+\DeclareMathOperator\Img   {Im}
+\DeclareMathOperator\range {range}
+
+\newcommand\trio  {\triangle}
+
+\newcommand\rc    {\right\rceil}
+\newcommand\lc    {\left\lceil}
+\newcommand\rf    {\right\rfloor}
+\newcommand\lf    {\left\lfloor}
+\newcommand\ceil  [1] {\lc #1 \rc}
+\newcommand\floor [1] {\lf #1 \rf}
+
+\newcommand\lex   {<_{lex}}
+
+\newcommand\az    {\aleph_0}
+\newcommand\uaz   {^{\aleph_0}}
+\newcommand\al    {\aleph}
+\newcommand\ual   {^\aleph}
+\newcommand\taz   {2^{\aleph_0}}
+\newcommand\utaz  { ^{\left (2^{\aleph_0} \right )}}
+\newcommand\tal   {2^{\aleph}}
+\newcommand\utal  { ^{\left (2^{\aleph} \right )}}
+\newcommand\ttaz  {2^{\left (2^{\aleph_0}\right )}}
+
+\newcommand\n     {$n$־יה\ }
+
+% Math A&B shortcuts
+\newcommand\logn  {\log n}
+\newcommand\logx  {\log x}
+\newcommand\lnx   {\ln x}
+\newcommand\cosx  {\cos x}
+\newcommand\sinx  {\sin x}
+\newcommand\sint  {\sin \theta}
+\newcommand\tanx  {\tan x}
+\newcommand\tant  {\tan \theta}
+\newcommand\sex   {\sec x}
+\newcommand\sect  {\sec^2}
+\newcommand\cotx  {\cot x}
+\newcommand\cscx  {\csc x}
+\newcommand\sinhx {\sinh x}
+\newcommand\coshx {\cosh x}
+\newcommand\tanhx {\tanh x}
+
+\newcommand\seq   {\overset{!}{=}}
+\newcommand\slh   {\overset{LH}{=}}
+\newcommand\sle   {\overset{!}{\le}}
+\newcommand\sge   {\overset{!}{\ge}}
+\newcommand\sll   {\overset{!}{<}}
+\newcommand\sgg   {\overset{!}{>}}
+
+\newcommand\h     {\hat}
+\newcommand\ve    {\vec}
+\newcommand\lv    {\overrightarrow}
+\newcommand\ol    {\overline}
+
+\newcommand\mlcm  {\mathrm{lcm}}
+
+\DeclareMathOperator{\sech}   {sech}
+\DeclareMathOperator{\csch}   {csch}
+\DeclareMathOperator{\arcsec} {arcsec}
+\DeclareMathOperator{\arccot} {arcCot}
+\DeclareMathOperator{\arccsc} {arcCsc}
+\DeclareMathOperator{\arccosh}{arccosh}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\arcsech}{arcsech}
+\DeclareMathOperator{\arccsch}{arccsch}
+\DeclareMathOperator{\arccoth}{arccoth}
+\DeclareMathOperator{\atant}  {atan2} 
+\DeclareMathOperator{\Sp}     {span} 
+\DeclareMathOperator{\sgn}    {sgn} 
+\DeclareMathOperator{\row}    {Row} 
+\DeclareMathOperator{\adj}    {adj} 
+\DeclareMathOperator{\rk}     {rank} 
+\DeclareMathOperator{\col}    {Col} 
+\DeclareMathOperator{\tr}     {tr}
+
+\newcommand\dx    {\,\mathrm{d}x}
+\newcommand\dt    {\,\mathrm{d}t}
+\newcommand\dtt   {\,\mathrm{d}\theta}
+\newcommand\du    {\,\mathrm{d}u}
+\newcommand\dv    {\,\mathrm{d}v}
+\newcommand\df    {\mathrm{d}f}
+\newcommand\dfdx  {\diff{f}{x}}
+\newcommand\dit   {\limhz \frac{f(x + h) - f(x)}{h}}
+
+\newcommand\nt[1] {\frac{#1}{#1}}
+
+\newcommand\limz  {\lim_{x \to 0}}
+\newcommand\limxz {\lim_{x \to x_0}}
+\newcommand\limi  {\lim_{x \to \infty}}
+\newcommand\limh  {\lim_{x \to 0}}
+\newcommand\limni {\lim_{x \to - \infty}}
+\newcommand\limpmi{\lim_{x \to \pm \infty}}
+
+\newcommand\ta    {\theta}
+\newcommand\ap    {\alpha}
+
+\renewcommand\inf {\infty}
+\newcommand  \ninf{-\inf}
+
+% Combinatorics shortcuts
+\newcommand\sumnk     {\sum_{k = 0}^{n}}
+\newcommand\sumni     {\sum_{i = 0}^{n}}
+\newcommand\sumnko    {\sum_{k = 1}^{n}}
+\newcommand\sumnio    {\sum_{i = 1}^{n}}
+\newcommand\sumai     {\sum_{i = 1}^{n} A_i}
+\newcommand\nsum[2]   {\reflectbox{\displaystyle\sum_{\reflectbox{\scriptsize$#1$}}^{\reflectbox{\scriptsize$#2$}}}}
+
+\newcommand\bink      {\binom{n}{k}}
+\newcommand\setn      {\{a_i\}^{2n}_{i = 1}}
+\newcommand\setc[1]   {\{a_i\}^{#1}_{i = 1}}
+
+\newcommand\cupain    {\bigcup_{i = 1}^{n} A_i}
+\newcommand\cupai[1]  {\bigcup_{i = 1}^{#1} A_i}
+\newcommand\cupiiai   {\bigcup_{i \in I} A_i}
+\newcommand\capain    {\bigcap_{i = 1}^{n} A_i}
+\newcommand\capai[1]  {\bigcap_{i = 1}^{#1} A_i}
+\newcommand\capiiai   {\bigcap_{i \in I} A_i}
+
+\newcommand\xot       {x_{1, 2}}
+\newcommand\ano       {a_{n - 1}}
+\newcommand\ant       {a_{n - 2}}
+
+% Linear Algebra
+\DeclareMathOperator{\chr}     {char}
+\DeclareMathOperator{\diag}    {diag}
+\DeclareMathOperator{\Hom}     {Hom}
+\DeclareMathOperator{\Sym}     {Sym}
+\DeclareMathOperator{\Asym}    {ASym}
+
+\newcommand\lra       {\leftrightarrow}
+\newcommand\chrf      {\chr(\F)}
+\newcommand\F         {\mathbb{F}}
+\newcommand\co        {\colon}
+\newcommand\tmat[2]   {\cl{\begin{matrix}
+            #1
+        \end{matrix}\, \middle\vert\, \begin{matrix}
+            #2
+\end{matrix}}}
+
+\makeatletter
+\newcommand\rrr[1]    {\xxrightarrow{1}{#1}}
+\newcommand\rrt[2]    {\xxrightarrow{1}[#2]{#1}}
+\newcommand\mat[2]    {M_{#1\times#2}}
+\newcommand\gmat      {\mat{m}{n}(\F)}
+\newcommand\tomat     {\, \dequad \longrightarrow}
+\newcommand\pms[1]    {\begin{pmatrix}
+        #1
+\end{pmatrix}}
+
+% someone's code from the internet: https://tex.stackexchange.com/questions/27545/custom-length-arrows-text-over-and-under
+\makeatletter
+\newlength\min@xx
+\newcommand*\xxrightarrow[1]{\begingroup
+    \settowidth\min@xx{$\m@th\scriptstyle#1$}
+    \@xxrightarrow}
+\newcommand*\@xxrightarrow[2][]{
+    \sbox8{$\m@th\scriptstyle#1$}  % subscript
+    \ifdim\wd8>\min@xx \min@xx=\wd8 \fi
+    \sbox8{$\m@th\scriptstyle#2$} % superscript
+    \ifdim\wd8>\min@xx \min@xx=\wd8 \fi
+    \xrightarrow[{\mathmakebox[\min@xx]{\scriptstyle#1}}]
+    {\mathmakebox[\min@xx]{\scriptstyle#2}}
+    \endgroup}
+\makeatother
+
+
+% Greek Letters
+\newcommand\ag        {\alpha}
+\newcommand\bg        {\beta}
+\newcommand\cg        {\gamma}
+\newcommand\dg        {\delta}
+\newcommand\eg        {\epsi}
+\newcommand\zg        {\zeta}
+\newcommand\hg        {\eta}
+\newcommand\tg        {\theta}
+\newcommand\ig        {\iota}
+\newcommand\kg        {\keppa}
+\renewcommand\lg      {\lambda}
+\newcommand\og        {\omicron}
+\newcommand\rg        {\rho}
+\newcommand\sg        {\sigma}
+\newcommand\yg        {\usilon}
+\newcommand\wg        {\omega}
+
+\newcommand\Ag        {\Alpha}
+\newcommand\Bg        {\Beta}
+\newcommand\Cg        {\Gamma}
+\newcommand\Dg        {\Delta}
+\newcommand\Eg        {\Epsi}
+\newcommand\Zg        {\Zeta}
+\newcommand\Hg        {\Eta}
+\newcommand\Tg        {\Theta}
+\newcommand\Ig        {\Iota}
+\newcommand\Kg        {\Keppa}
+\newcommand\Lg        {\Lambda}
+\newcommand\Og        {\Omicron}
+\newcommand\Rg        {\Rho}
+\newcommand\Sg        {\Sigma}
+\newcommand\Yg        {\Usilon}
+\newcommand\Wg        {\Omega}
+
+% Other shortcuts
+\newcommand\tl    {\tilde}
+\newcommand\op    {^{-1}}
+
+\newcommand\sof[1]    {\left | #1 \right |}
+\newcommand\cl [1]    {\left ( #1 \right )}
+\newcommand\csb[1]    {\left [ #1 \right ]}
+\newcommand\ccb[1]    {\left \{ #1 \right \}}
+
+\newcommand\bs        {\blacksquare}
+\newcommand\dequad    {\!\!\!\!\!\!}
+\newcommand\dequadd   {\dequad\duquad}
+
+\renewcommand\phi     {\varphi}
+
+\newtheorem{Theorem}{משפט}
+\theoremstyle{definition}
+\newtheorem{definition}{הגדרה}
+\newtheorem{Lemma}{למה}
+\newtheorem{Remark}{הערה}
+\newtheorem{Notion}{סימון}
+
+\newcommand\theo  [1] {\begin{Theorem}#1\end{Theorem}}
+\newcommand\defi  [1] {\begin{definition}#1\end{definition}}
+\newcommand\rmark [1] {\begin{Remark}#1\end{Remark}}
+\newcommand\lem   [1] {\begin{Lemma}#1\end{Lemma}}
+\newcommand\noti  [1] {\begin{Notion}#1\end{Notion}}
+
+% DS
+\newcommand\limsi     {\limsup_{n \to \inf}}
+\newcommand\limfi     {\liminf_{n \to \inf}}
+
+\DeclareMathOperator\amort   {amort}
+\DeclareMathOperator\worst   {worst}
+\DeclareMathOperator\type    {type}
+\DeclareMathOperator\cost    {cost}
+\DeclareMathOperator\tim     {time}
+
+\newcommand\dsList{
+    \sFunc{List}
+    \sFunc{Retrieve}
+    \SetKwFunction{RetrieveFirst}{Retrieve-First}
+    \SetKwFunction{RetrieveLast}{Retrieve-Last}
+    \sFunc{Delete}
+    \SetKwFunction{DeleteFirst}{Delete-First}
+    \SetKwFunction{DeleteLast}{Delete-Last}
+    \sFunc{Insert}
+    \SetKwFunction{InsertFirst}{Insert-First}
+    \SetKwFunction{InsertLast}{Insert-Last}
+    \sFunc{Shift}
+    \sFunc{Length}
+    \sFunc{Concat}
+    \sFunc{Plant}
+    \sFunc{Split}
+}
+\newcommand\dsQueue{
+    \sFunc{Queue}
+    \sFunc{Enqueue}
+    \sFunc{Head}
+    \sFunc{Dequeue}
+}
+\newcommand\dsStack{
+    \sFunc{Stack}
+    \sFunc{Push}
+    \sFunc{Top}
+    \sFunc{Pop}
+}
+\newcommand\dsVector{
+    \sFunc{Vector}
+    \sFunc{Get}
+    \sFunc{Set}
+}
+\newcommand\dsGraph{
+    \sFunc{Graph}
+    \sFunc{Edge}
+    \SetKwFunction{AddEdge}{Add-Edge}
+    \SetKwFunction{RemoveEdge}{Remove-Edge}
+    \sFunc{InDeg} \sFunc{OutDeg}
+}
+\newcommand\importDs{
+    \dsList
+    \dsQueue
+    \dsStack
+    \dsVector
+    \dsGraph
+    \SetKwData{error}{\color{codered}error}
+    \SetKwInOut{Input}{input}
+    \SetKwInOut{Output}{output}
+    \SetKwRepeat{Do}{do}{while}
+    \SetKwData{Null}{\color{codeblue}null}
+}
+
+
+% Algorithems
+\newcommand\sFunc [1] {\SetKwFunction{#1}{#1}}
+\newcommand\sData [1] {\SetKwData{#1}{#1}}
+\newcommand\sIO   [1] {\SetKwInOut{#1}{#1}}
+\newcommand\ttt   [1] {\sen \texttt{#1} \she\,}
+\newcommand\io    [2] {\Input{#1}\Output{#2}\BlankLine}
+
+%! ~~~ Document ~~~
+
+\author{שחר פרץ}
+\title{\textit{היסטוריה 29}}
+\begin{document}
+    \maketitle
+    \section{טרור חלק 2}
+    משהו משהו אסור לאכול יותר והיא לא חייבת לנו לאפשר לאכול היום. 
+    
+    \section{המשך השיעור הקודם}
+    הפעם הראשונה שגרמניה לא מצליחה לנצח היה במבצע הרי הים, נגד בריטניה. 
+    
+    \subsection{רעיון ``הדר החדש''}
+    ``מאוד מאוד חשוב ויש נטייה לתלמידים לא להבין את זה''. הסדר החדש: כבוש, שלוט, ונצל. זהו פרק נפרד בספר שלנו. זהו רעיון, ולא עקרון. רעיון הסדר החדש מדבר על סדר כלכלי, חברתי ופוליטי חדש בעולם. הוא מבוסס על שני עקרונות: מרחב מחייה ותורת הגזע. זכרו: התפישה הנאצית למרחב מחייה לא היא לא תפישה של כיבוש, אלא כאילו זה היה שלהם מעולם. פירוט המצגת הקודמת. העולם מחולק ע''פ תורת הגזע, ולכן ברגע שכובשים מדינה מתייחסים למדינה בהתאם לגזעם. לדוגמה, עם נכבשת הולנד, מתייחסים אליהם כמו לארים. עם נכבשת פולין – ``פחות''. \textbf{היחס לעמים הנכבשים הוא בהתאם למדרג הגזעי שלהם}. יש לזה משמעות בניהול המדינה. מדיניות אריות יכלו לנהל את מדיניות הפנים בצורה ``חלקית+'' (אך לא מדיניות חוץ כי ``הם לא מדינה הם חלק מהרייך''). לעומתם ``אין פולין'' – היא נכבשה ולכן השלטון ישיר ונאצי. היחס לפולנים הוא ``קצת, לא הרבה'' יותר טוב מליחס ליהודים. מיליוני פולנים נרצחו (היו שם גם משתפים וכו'). מחנות ההשמדה נמצאים בפולין בין היתר בגלל שזהו האיזור הסלאבי. 
+    
+    עיקרי רעיון סדר החדש: 
+    \begin{itemize}
+        \item הקמת סדר חברתי־כלכלי־מדיני במסוסס על האידיאולוגיה הנאצית – סדר חדש שיחליף את הדר הקיים, במבנה חדש ובחוקים חדשים אשר יקבעו אלו עמים זכאים לחיות בעולם, מה מקומו של כל עם ועם, מהם הגבולות המדיניות וכיצד יתפתחו העמים, ומה יהיה אופי היחסים ביניהם. 
+        \item מיון ודירוג העמים האירופים לפי תורת הגזע: 
+        \begin{itemize}
+            \item העמים ממוצע ארי – הולנגים, דנים, ונרווגים יהיו בעלי מעמד שווה זכויות בבאימפריה הגרמנית. 
+            \item העמית הסלאבים – רוסים ופולינים, ייעודם הוא לשרת עת הגזע האי. 
+            \item הגזעים הנחותים – יהודים וצוענים, (בהגדרות מסויימות, אנטי־גזע). הם נועדו להשמדה ואין להם מקום בסדר החדש
+        \end{itemize}
+    \end{itemize}
+    מוטיב חוזר של ויכוח בין מורה כלשהו לעמירם, הוא יוצא. 
+    
+    \textit{הערה: }צרפתים ואנגלים מחשבו למשהו ביניים – מעל הסלאבים ומתחת לארים. ערבים בתחתית, הם גזע אך מתחת לסלביים. המדרג הגזעי של היפנים וה''צהובים'' הוא גם היה נמוך. 
+    
+    הפתרון הסופי הוא אחד מהתוצאות של הסדר החדש – בסדר החדש אין יהודים, כי מקומם הוא ``אין''. 
+    
+    \subsubsection{מימוש הסדר החדש}
+    \begin{itemize}
+        \item עבודות כפייה – רוסים, פולנים, רומנים – לא רק יהודים – נשלחו לעבוודת כפייה בתנאים קשים, ורבים מהם מתים מהתנאים (אף כי לא נרחצים במחנות השמדה). כשבעה מיליון עובדי כפייה הועברו לגרמניה. זאת כדי לשרת את כלכלת הרייך. 
+        \item העברת אוכלוסייה בכפייה – העברת אוכולוסייה ממקום מגוריהם, על מנת לאפשר יישוב גרמנים במקומם. עם חלוקת פולין יישבו הנאצים אוכלוסייה ארית שם. 
+        \item המתות ``חסד'' ולבנסבורן – כדי ``לטהר'' את הגזע הארי, אישר היטלר ב־39 את מבצע ``המתת החסד'' (האוטנזיה) התחילה בתוך גרמניה המתתות חולי רוח, נכים, מפגרים, חולים במחלות סופניות ותורשתיות, ועוד. עשות אלפי גרמנים ``ארים'' נרצחו במבצע זה. המבצע הופסק לבסוף בלחץ הכנסייה הקתולית ובשל לחץ דעת קהל. 
+        
+        לונסבורן – התחיל בגרמניה, מרכזי הרבייה. התחיל עם נשים אריות גרמניות והמשיך שמדינות כבושות עם נשים אריות לא גרמניות. מיועד להשבחת הגזע הארי. 
+        \item ניצול כלכלי – מזון, מוצרי תעשייה וחומרי גלם הועברו מהארצות הכבושות לגרמנייה. הנאצים שדוו סחורות שטרי כסף, זה, אוצרות אומנות ועוד. ברוסיה שרפו הכל בשיטת ``אדמה חרוכה'' כדי שהנאצים לא ישתמשו בזה. ``הצבע צועד על קיבתו'', וכן על ציודו – ביגוד, לחימה וכו'. קווי אספקה ארוכים יותר אממ יותר קשה. והחורף הרוסי הוביל אח''כ להפסדם באוסייה. מזון לדוגמה, לא נשלח לגרמנייה, אך יצירות אומנות, בגדי ילידים וכו' כן. דברים שמשמשים את הצבא כמובן שלא נשלחו לגרמנייה. 
+        \item הפתרון הסופי – אתם יודעים מה זה. חוץ מזה הרחבה בשנה הבאה. רצח שיטתי של היהודים, שמתחיל מאמצע 41, ובעיקר ב־42 ו־43. במהלכו, הנאצים הקימו מפעלים של רצח. זה \textit{לא} אנשים שמתים מהתנאים במחנות עבודה, או מהתנאים בגטאות. אלא ברצח שיטתי שלטובתו מוקמים מרכזים, AKA ``מחנות השמדה''. התחיל בבורות ולא במחנות השמדה. 
+    \end{itemize}
+    
+    פירוט הקרבות והכיבושים – תראו את ``אפוקליפסה'', סדרה ממש טובה. לא נפרט על זה. 
+    
+    \subsection{יהודי פולין עם הכיבוש}
+    בשיעורים הקרובים נדבר על יהודי פולין ועל הגטאות. 
+    \subsubsection{הקדמה}
+    אנחנו חיים במדינה ריבונית המדינה על אזרחיה. זה לא המצב בפולין. לכן, צריך להיזהר בשיפוטיות כלפי דברים שמדברים עליהם – קל יחסית לשאול ``איך הם לא מרדו/ברחו/עזרו''. זה לא אומר שא־אפשר לשאול שאלות, אבל, אין לנו זכות לשפוטם כי לא היינו במצב הזה. אנחנו לומדים יהום יותר מ־80 שנה אחרי ויודיעם את סוף הסיפור (מחנות השמדה, פתורן סופי וכו') – הם לא. לפני כן, תמיד היו פוגרומים ואנטישמיות, אך היהודים הורידו את הראש, אמרו אוקי זה יעבוד וזה היה נגמר. \textit{אין תקדים לאירועי השואה}. עד שלב מאוד מאוחר, הם עלו על הרכבות ולא ידעו שהם נוסעים למחנה השמדה. 
+    
+    \subsubsection{חזרה לחומר}
+    במשך כשלושה חודשים לאחר פרוץ המלחמה היה הגבול הסובייטי במזרח יחסית פתוח ו־300K יהודים נמלטו אל השטח הרוסי. כבר ידעו מה קורה ליהודים בגרמנייה ולכן הם ברחו. חלקם הגדול, היו צעירים ללא משפחות. משתי סיבות: ה־state of mind של צעירים יותר גמיש, וכן הם לא צריכים לגרור משפחה אחריהם. מנהיגי תנועות הנוער היו חלק ממנהיגות הצעירה. חלקם, נכנסו לגטאות, פעלו וסייעו שם. מאוחר יותר הם היו אלו להוביל את המרידות בכטאות. 
+    
+    כאשר מדברים על גטאות ומחנות השמדה – מדברים על מרכז פולין. 
+    \subsubsection{השואה בפולין עד תחילת הפתרון הוספי – ``בחירה בעולם ללא בחירה''}
+    יש בחירה. הבחירה היא בעולם שלא בחרו להיות שם, בתנאים קשים. ובתוך כך צריך לבצע בחירות – במרה האנושית, איך להתנהג ולדאוג לילדם, איך והאם לשמור על צלם אנוש, וכו'. בהינתן העולם שאתה לא יכול לבחור (הגטו), יש לך בחירה. ``אבל אנחנו לא שופטים את הבחירה''. 
+    
+    $\ra$ שיר – מה הייתה המילה שואה $\la$
+    ב־21 בספטמבר 1939, נשלחה איגרת הבזק של היידריך, ראש משטרת הבטחון הגרמנית, אל מפקדי האיינזצגרופן – תפקידן לטפל ולנהל את הדברים במקום, בדגש על מתנגדי משטר ויהודים. 
+    
+    היא הייתה אגרת סודית, וממנה אפשר ללמומד על תוכניותה העתידיות של גרמניה כלפי היהודים. \textit{הערה: }היא לא מופיעה בספר, אך חשוב לדעת ולהבין אותה. 
+    
+    \begin{itemize}
+        \item פינוי כל היהודים מאיזור מערב פולין. איכוזם של יהודים ברבעי מגורים מיוחדים בערים שגודלן מעל 500 נפש ונמצאות בסמוך לתחנות ומסילות רכבת. 
+        
+        \textit{הערה: }הם לא ידעו למה. הם רצו לרכז עד שיעבירו. 
+        \item אריזציה של מפעלים יהודים. לא כל הרכוש והמפעלים. הם השאירו את מה ששירת את האינטרסים שלהם. 
+        \item הקמת מועצת זקנים = יוגנראטים שיואכו מעד 24 אנשים סמכותיים בעלי השפעה, או מהרבנים שנותרו בקהילה. הם אמורים להיות \textit{כפופים} לצבע הרייך ולהשמע להוראותיו. 
+    \end{itemize}
+    
+    
+    
+    \ndoc
+\end{document}
