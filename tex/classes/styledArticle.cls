@@ -39,6 +39,6 @@
 	}
 	\usepackage{yfonts}
 	\def\gothstart#1{\noindent\smash{\lower3ex\hbox{\llap{\Huge\gothfamily#1}}}
-		\parshape=3 3.1em \dimexpr\hsize-3.4em 3.4em \dimexpr\hsize-3.4em 0pt \hsize}
+		\parshape=3 2.0em \dimexpr\hsize-2.4em 2.4em \dimexpr\hsize-2.5em 0pt \hsize}
 	\def\frakstart#1{\noindent\smash{\lower3ex\hbox{\llap{\Huge\frakfamily#1}}}
 		\parshape=3 1.5em \dimexpr\hsize-1.5em 2em \dimexpr\hsize-2em 0pt \hsize}
