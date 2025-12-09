@@ -15,61 +15,6 @@
 \usepackage[thinc]{esdiff}
 
 
-% tikz
-\usepackage{tikz}
-\usetikzlibrary{graphs}
-\newcommand\sqw{1}
-\newcommand\squ[4][1]{\fill[#4] (#2*\sqw,#3*\sqw) rectangle +(#1*\sqw,#1*\sqw);}
-
-
-% code 
-\usepackage{listings}
-\usepackage{xcolor}
-
-\definecolor{codegreen}{rgb}{0,0.35,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codenumber}{rgb}{0.1,0.3,0.5}
-\definecolor{codeblue}{rgb}{0,0,0.5}
-\definecolor{codered}{rgb}{0.5,0.03,0.02}
-\definecolor{codegray}{rgb}{0.96,0.96,0.96}
-
-\lstdefinestyle{pythonstylesheet}{
-	language=Java,
-	emphstyle=\color{deepred},
-	backgroundcolor=\color{codegray},
-	keywordstyle=\color{deepblue}\bfseries\itshape,
-	numberstyle=\scriptsize\color{codenumber},
-	basicstyle=\ttfamily\footnotesize,
-	commentstyle=\color{codegreen}\itshape,
-	breakatwhitespace=false, 
-	breaklines=true, 
-	captionpos=b, 
-	keepspaces=true, 
-	numbers=left, 
-	numbersep=5pt, 
-	showspaces=false,                
-	showstringspaces=false,
-	showtabs=false, 
-	tabsize=4, 
-	morekeywords={as,assert,nonlocal,with,yield,self,True,False,None,AssertionError,ValueError,in,else},              % Add keywords here
-	keywordstyle=\color{codeblue},
-	emph={var, List, Iterable, Iterator},          % Custom highlighting
-	emphstyle=\color{codered},
-	stringstyle=\color{codegreen},
-	showstringspaces=false,
-	abovecaptionskip=0pt,belowcaptionskip =0pt,
-	framextopmargin=-\topsep, 
-}
-\newcommand\pythonstyle{\lstset{pythonstylesheet}}
-\newcommand\pyl[1]     {{\lstinline!#1!}}
-\lstset{style=pythonstylesheet}
-
-\usepackage[style=1,skipbelow=\topskip,skipabove=\topskip,framemethod=TikZ]{mdframed}
-\definecolor{bggray}{rgb}{0.85, 0.85, 0.85}
-\mdfsetup{leftmargin=0pt,rightmargin=0pt,innerleftmargin=15pt,backgroundcolor=codegray,middlelinewidth=0.5pt,skipabove=5pt,skipbelow=0pt,middlelinecolor=black,roundcorner=5}
-\BeforeBeginEnvironment{lstlisting}{\begin{mdframed}\vspace{-0.4em}}
-	\AfterEndEnvironment{lstlisting}{\vspace{-0.8em}\end{mdframed}}
-
 
 % Deisgn
 \usepackage[labelfont=bf]{caption}
@@ -175,6 +120,7 @@
 \newcommand\du    {\,\mathrm{d}u}
 \newcommand\dv    {\,\mathrm{d}v}
 \newcommand\df    {\mathrm{d}f}
+\newcommand\md    {\mathrm{d}}
 \newcommand\dfdx  {\diff{f}{x}}
 \newcommand\dit   {\limhz \frac{f(x + h) - f(x)}{h}}
 
@@ -186,7 +132,7 @@
 \newcommand\bg        {\beta}
 \newcommand\cg        {\gamma}
 \newcommand\dg        {\delta}
-\newcommand\eg        {\epsi}
+\newcommand\eg        {\varepsilon}
 \newcommand\zg        {\zeta}
 \newcommand\hg        {\eta}
 \newcommand\tg        {\theta}
@@ -227,7 +173,7 @@
 \newcommand\ccb[1]    {\left \{ #1 \right \}}
 \newcommand\norm[1]   {\left \vert \left \vert #1 \right \vert \right \vert}
 
-
+\DeclareMathOperator{\dist}{dist}
 %! ~~~ Document ~~~
 
 \author{Shahar Perets}
@@ -235,23 +181,23 @@
 \begin{document}
 	\begin{multicols}{3}
 		\section{Mechanics}
-		\[ v = \frac{\dx}{\dt} \]
-		\[ a = \frac{\dv}{\dt} \]
+		\[ \vec v = \frac{\ds}{\dt} \]
+		\[ \vec a = \frac{\dv}{\dt} = \frac{\md^{2}s}{\md^{2}t} \]
         Where $\bar v$ is the average velocity:
 		\[ \bar v = \frac{\Dg x}{\Dg t} \]
-        In a constant acceleration:
+        Assuming acceleration is constant:
 		\begin{align*}
-			v &= v_0 + at \\
-			x &= x_0 + v_0t + \frac{1}{2}at^2 \\
-			x &= x_0 + \frac{v_0 + v}{2}t \\
-			\norm{v} &= \sqrt{v_0^2 + 2a(x - x_0)} 
+			\vec v(t) &= \vec v_0 + \vec at \\
+			\vec x(t) &= \vec x_0 + \vec v_0t + \frac{1}{2}\vec at^2 \\
+			\vec x(t) &= \vec x_0 + \frac{\vec v_0 + v}{2}t \\
+			\norm{v} &= \sqrt{v_0^2 + 2\norm a\norm {x - x_0}} 
 		\end{align*}
 		
 		\section{Forces}
-		\[ F_g = mg \]
-		\[ F_{sp} = k \, \Dg \ell \]
-		\[ f_s \le \mu_s N \]
-		\[ f_k = \mu_k N \]
+		\[ \vec F_g = m\vec g \]
+		\[ \norm{\vec F_{sp}} = k \, \Dg \ell \]
+		\[ \norm{f_s} \le \norm{\mu_s \vec N} \]
+		\[ \vec f_k = \mu_k \vec N \]
         \textbf{Newton's laws: }
         \begin{enumerate}
             \item A body remains at rest, or in motion at a constant speed in a straight line, unless it is acted upon by a force. 
@@ -275,19 +221,19 @@
         \columnbreak
 		
 		\section{Rotational Movement}
-		\[ f = \frac{1}{T} \quad \csb{\mathrm{Hz}} \]
+		\[ f := \frac{1}{T} \quad \csb{\mathrm{Hz}} \]
 		\[ L = r \psi_{\mathrm{rad}} \]
-		\[ \wg = 2\pi \. f = \frac{2\pi}{T} \]
+		\[ \wg := 2\pi \. f = \frac{2\pi}{T} \]
 		\[ v \peq \frac{2\pi r}{T} \]
 		\[ \bar \wg = \frac{\Dg \theta}{\Dg t} \]
 		\[ v = \wg r \]
-		\[ a_R = \frac{v^2}{r} = \wg^2 r \]
+		\[ \norm{\vec a_R} = \frac{\norm{v}^2}{r} = \wg^2 r \]
 		\[ P = 2\pi r \]
 		Critical Velocity at max.: 
 		\[ N = 0 \iff v = \sqrt{gr} \]
-		\[ a_T = -g \sin \ag \]
-		\[ \vec a = \vec a_T + \vec a_r \]
-		\[ |a| = \sqrt{a_T^2 + a_R^2} \]
+		\[ \vec a_T = -g \sin \ag \]
+		\[ \vec a := \vec a_T + \vec a_r \]
+		\[ \norm a = \sqrt{a_T^2 + a_R^2} \]
 		\[ \tant = \frac{|a_T|}{|a_R|} \]
         
 		\section{Gravity}
@@ -338,6 +284,52 @@
         \end{center}
         \[ G = 6.67 \cdot 10^{-11} \frac{\mathrm{N}m^2}{\mathrm{kg}} \]
 	\end{multicols}
+	\pagebreak
+	\begin{multicols}{3}
+		\begin{center}
+			\begin{tabular}{|c|c|c|}
+				\hline Obj & Mass [$\mathrm{kg}$] & Charge [$\mathrm{C}$] \\
+				\hline Electron & $9.11 \cdot 10^{-31}$ & $-1.6 \cdot 10^{-19}$ \\
+				\hline Proton & $1.67 \cdot 10^{-27}$ & $+1.6 \cdot 10^{-19}$ \\
+				\hline Neutron & $1.67 \cdot 10^{-27}$ & $0$ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		\[ k :\approx 9 \cdot 10^{9}\csb{\frac{Nm^{2}}{C^{2}}} = \frac{1}{4 \pi \eg_0} \]
+		\[ \eg_0 := \frac{1}{4\pi k} \approx 8.85 \cdot 10^{-12} \]
+		\section{Electricity}
+		Coulomb's law: 
+		\[ \norm{\vec F_E} = k \frac{\sof{q_1} \sof{q_2}}{r^{2}} \]
+		Definition of the electrical field of a given particle with charge $q$: 
+		\[ \vec E = \frac{\vec F_E}{q} \csb{\frac{N}{C}} \]
+		Definition of charge density: 
+		\[ \sg = \frac{Q}{A} \]
+		Given an infinity large plane: 
+		\[ E = 2\pi k \sg = \frac{\sg}{2\eg_0} \]
+		\begin{align*}
+			\Delta W_{A \to B} &= kq_1q_2 \cl{\frac{1}{r_B} - \frac{1}{r_A}} \\
+			&= (U_E)_B - (U_E)_A
+		\end{align*}
+		Hence the potential electric energy: 
+		\[ U_E = k \sum_{B} \frac{q_Aq_B}{\dist(A, B)} \ \cl{\text{singular }\frac{kqQ}{r}} \]
+		Definition of electric potential in a given point: 
+		\[ V_A = \sum_B k\frac{q_B}{\dist(A, B)} \csb{V = \frac{J}{C}} \]
+		\[ W_{A \to B} = qV_{AB} = q\underbrace{(V_B - V_A)}_{\text{Voltage}} \]
+		\[ E = -\frac{\md V}{\dx} \]
+		Potential inside a conductive ball: 
+		\[ V = \frac{kQ}{R} \]
+		
+		\section{Capacitors}
+		Where $V$ is the voltage between both ends of the capacitor, the capacitance is defined as: 
+		\[ C:= \frac{q}{V}\csb{F = \frac{Q}{V} = \frac{J}{V^{2}}} \implies q = CV \]
+		\[ V = E \cdot d \]
+		\[ U = \frac{1}{2}QV = \frac{1}{2}CV^2 \]
+		\[ C = \frac{\eg_0 \eg_r A}{d} \]
+		\[ E = \frac{\sg}{\eg_0} = \frac{V}{d} \]
+		
+		
+	\end{multicols}
+	
 	\ndoc
 	
 \end{document}
