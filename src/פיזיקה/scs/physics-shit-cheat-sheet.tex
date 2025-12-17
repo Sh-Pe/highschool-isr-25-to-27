@@ -311,22 +311,28 @@
 			&= (U_E)_B - (U_E)_A
 		\end{align*}
 		Hence the potential electric energy: 
-		\[ U_E = k \sum_{B} \frac{q_Aq_B}{\dist(A, B)} \ \cl{\text{singular }\frac{kqQ}{r}} \]
+		\[ U_E = k \sum_{A, B} \frac{q_Aq_B}{\dist(A, B)} \ \cl{\text{singular }\frac{kqQ}{r}} \]
 		Definition of electric potential in a given point: 
 		\[ V_A = \sum_B k\frac{q_B}{\dist(A, B)} \csb{V = \frac{J}{C}} \]
 		\[ W_{A \to B} = qV_{AB} = q\underbrace{(V_B - V_A)}_{\text{Voltage}} \]
-		\[ E = -\frac{\md V}{\dx} \]
+		\[ E = -\frac{\md v}{\dx} \quad V = -\int E\dx \seq \frac{E}{d} \]
 		Potential inside a conductive ball: 
 		\[ V = \frac{kQ}{R} \]
-		\[ E = -\frac{\dv}{\md r} \]
 		
 		\section{Capacitors}
 		Where $V$ is the voltage between both ends of the capacitor, the capacitance is defined as: 
 		\[ C:= \frac{q}{V}\csb{F = \frac{Q}{V} = \frac{J}{V^{2}}} \implies q = CV \]
 		\[ V = E \cdot d \]
-		\[ U = \frac{1}{2}QV = \frac{1}{2}CV^2 \]
+		\[ U_{\text{capacitor}} = \frac{1}{2}QV = \frac{1}{2}CV^2 = \frac{Q^2}{2C} \]
+		\[ U_{\text{battery}} = QV = CV^2 = \frac{Q^2}{C} \]
 		\[ C = \frac{\eg_0 \eg_r A}{d} \]
-		\[ E = \frac{\sg}{\eg_0} = \frac{V}{d} \]
+		\[ E = \frac{V}{d} = \frac{\sg}{\eg_0 \eg_r} = \frac{Q}{A \eg_0 \eg_r} \]
+		But for circular capacitor: 
+		\[ C = \frac{R_{\text{inner}}R_{\text{outer}}}{k(R_\text{outer} - R_\text{inner})} \]
+		(needs proving) when a capacitor is unconnected to a voltage source, inserting a dielectric will require: 
+		\[ W_{\text{external}} = \frac{Q^{2}}{2C}\cl{\frac{1}{\eg_r} - 1}< 0 \]
+		When connected to a battery: 
+		\[ W_{\text{external}} = -\frac{1}{2}V^{2}C\cl{\eg_r - 1} < 0 \]
 		
 		
 	\end{multicols}
