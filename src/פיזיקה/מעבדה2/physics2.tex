@@ -1,6 +1,7 @@
 \documentclass[]{../../../tex/classes/styledArticle}
 \usepackage{../../../tex/packages/hebrewSupport}
 
+\usepackage{graphicx}
 
 \renewcommand\lg{\lambda}
 \newcommand\ag{\alpha}
@@ -9,8 +10,9 @@
 \newcommand\mrm[1]{\mathrm{#1}}
 \newcommand\sof[1]{|#1|}
 \newcommand\cl[1]{(#1)}
+\newcommand\csb[1]{\left[#1\right]}
 \newcommand\N{\mathbb{N}}
-\author{פרץ קורן שפיר בוילר}
+\author{שחר פרץ, יונתן קורן, דניאל שפיר ואורי כהן}
 \title{מעבדה ראשונה בפיזיקה}
 \begin{document}
 	\maketitle
@@ -137,16 +139,15 @@
 	\begin{center}
 		\begin{tabular}{c|c|c|c|c|c} 
 			5 & 4ב' & 3ג & 3א & 2ד & המשתנה \\ \hline
-			680  & 190 & 300   & 500  & 1000 & $N^* \left[{\frac{1}{\mathrm{mm}}}\right]$ \\ \hline
-			48.5 & 26  & 10.35 & 34.5 & 84   & $\Delta x \left[{{\mathrm{mm}}}\right]$ \\ \hline
-			&  &  &  & & ${\tan \ag_1}$ \\ \hline
-			&  &  &  & & ${\ag_1}$ \\ \hline
-			&  &  &  & & ${\sin \ag_1}$ \\ 
+			$680$  & $190$ & $300$   & $500$  & $1000$ & $N^* \left[{\frac{1}{\mathrm{mm}}}\right]$ \\ \hline
+			$48.5$ & $26$  & $10.35$ & $34.5$ & $84$   & $\Delta x \left[{{\mathrm{mm}}}\right]$ \\ \hline
+			$0.485$ & $0.24$ & $0.1035$ & $9.395$ & $0.84$ & ${\tan \ag_1}$ \\ \hline
+			$25.87^{\circ}$ & $14.57^{\circ}$ & $5.91^{\circ}$ & $19.03^{\circ}$ & $40.03^{\circ}$ & ${\ag_1}$ \\ \hline
+			$0.436$ & $0.2516$ & $0.1030$ & $0.3261$ & $0.6532$ & ${\sin \ag_1}$ \\ 
 		\end{tabular}
 	\end{center}
 	
 	\subsection{שאלה 7}
-	TODO
 	
 	\begin{enumerate}[(A)]
 		\item נסביר מדוע הקשר בין $\sin \ag_1$ ו־$N^*$ הוא לינארי. 
@@ -228,7 +229,52 @@
 	
 	
 	\subsection{שאלה 4}
-	TODO
+	תלמיד קיבל סריג עקיפה לידיו, והתבקש למצוא את הקבוע שלו. לשם כך הוא האיר את הסריג באמצעות מקור אור מונוכרומטי סגול באורך גל של $\lg = 400\mrm{nm}$, ומצא את המרחקים בין קו האור המרכזי וקו האור הסמוך לו על המסך. 
+	
+	הוא ביצע מדידה זו חמש פעמים, כאשר $L$ המרחק בין המסך מהסריג משתנה. 
+	\begin{enumerate}[(A)]
+		\item נסביר בעזרת ביטוי מתאים שעבור זוויות קטנות, $X_1 \propto L$. 
+		
+		\textbf{תשובה. }ע''פ נוסחת יאנג בעבור זוויות קטנות כאשר $\sin x \approx \tan x$, שמביאה לנו את הנוסחה $X_1 = N^*L\lg$, ומפני ש־$N^*$ ו־$\lg$ קבועים, יש יחס ישר בין $X_1$ לבין $L$. 
+		\item נסרטט גרף המקשר בין שני הנתונים בטהל: 
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.5\linewidth]{images/img1}
+%			\caption{}
+			\label{fig:img1}
+		\end{figure}
+	
+		\item ניעזר בגרף כדי למצוא את קבוע הסריג. נבחין שהשיפוע הוא $0.05 = m = N^*\lg $. ידוע $\lg = 400\mrm{nm}$ ולכן קבוע הסריג הוא: 
+		\[ \frac{0.05}{400 \cdot 10^{-9}} = 125,000 \csb{\frac{1}{\mrm{m}}} = 125\csb{\frac{1}{\mrm{mm}}} \]
+		
+		\item בניסוי אחר, הואר הסריג בעל הקבוע $200\csb{\frac{1}{\mrm{mm}}}$ בשני צבעים בו זמנית: סגול באורך $\lg_1 = 400\mrm{nm}$ ואדום באורך $\lg_2 = 600\mrm{nm}$. במסך הוצב במרחק $2.5\mrm{m}$ מהסריג המואר. 
+		\begin{itemize}
+			\item \textbf{הצבע המופיע בתבנית: }נבחין ש־$X_1 = 30\mrm{cm}$ במקרה זה. 
+			
+			נסמן ב־$X_1^{(1)}$ את המרחק מנק' המקסימום הראשון בעבור הסגול, וב־$X_1^{(2)}$ בעבור האדום. 
+			\begin{gather*}
+				X_1^{(1)} = \lg_1N^*L =  400 \cdot 10^{-9} \cdot 200 \cdot 10^{3} \cdot 2.5 = 0.2\mrm{m} \\
+				X_1^{(2)} = \lg_2N^*L =  600 \cdot 10^{-9} \cdot 200 \cdot 10^{3} \cdot 2.5 = 0.3\mrm{m}
+			\end{gather*}
+			קל להבחין מהסרטוט שמתרחש $X_1=0.3\mrm{m}$. לכן $X_1 = X_1^{(1)}$ כלומר האור שאליו שייכת תבנית ההתאבכות הוא האדום. 
+			\item \textbf{התבנית עם הצבע השני: }הסרטוט הנ''ל מכיל את שני הצבעים, באותו קנה מידה: 
+			
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width=0.5\linewidth]{images/img2}
+%				\caption{}
+				\label{fig:img2}
+			\end{figure}
+			
+			\item בניסוי אחר שלושה תלמידים לקחו שלוש לוחיות שונות. א' סריג עקיפה, ב' לוחית עם שני סדקים וג' לוחית עם סדק אחד. 
+			
+			\begin{itemize}
+				\item עבור התלמיד ג' עם הסדק היחיד, נחפש גרף שאורך הפס שלו גדול פי 2 מאורך הפסים שלידו. נבחין שגרפים 1 ו־2 בעלי אורך פס קבוע ולכן נסיק שלתלמיד ג' שייך גרף 1. אנו יודעים שככל שיש יותר חריצים בסריג/תבנית כך התמונה של קווי האור הבודדים תתבההר, ולכן גרף 3 מתאים לתלמיד א' וגרף 2 לתלמיד ב'. 
+			\end{itemize}
+		\end{itemize}
+
+	\end{enumerate}
 	\subsection{שאלה 5}
 	TODO
 	
